@@ -6,14 +6,15 @@ import 'angular-ui-router';
 import 'ionic-scripts';
 import Angular from 'angular';
 import Loader from 'angular-ecmascript/module-loader';
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
  
 // Modules
-import ChatsCtrl from '../controllers/chats.controller';
-import CalendarFilter from '../filters/calendar.filter';
-import RoutesConfig from '../routes';
+import ProductsCtrl from './controllers/products';
+import ProductCtrl from './controllers/product';
+import CalendarFilter from './filters/calendar';
+import RoutesConfig from './routes';
 
-const App = 'Whatsapp';
+const App = 'ShopAgent';
  
 // App
 Angular.module(App, [
@@ -22,7 +23,8 @@ Angular.module(App, [
 ]);
  
 new Loader(App)
-  .load(ChatsCtrl)
+  .load(ProductsCtrl)
+  .load(ProductCtrl)
   .load(CalendarFilter)
   .load(RoutesConfig);
 

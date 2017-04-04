@@ -1,0 +1,1 @@
+mongoimport --mode upsert --db meteor --collection products --port=3001 --file ./private/data/products.json

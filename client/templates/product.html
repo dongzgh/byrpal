@@ -1,5 +1,13 @@
 <ion-view view-title="Product">
   <ion-content>
     <p>This is the Product page.</p>
+    <div class="list">
+      <label class="item item-input item-select">
+      <div class="input-label">Category</div>
+      <select>
+        <option ng-repeat="category in productCtrl.categories">{{category.name}}</option>
+      </select>
+    </label>
+    </div>
   </ion-content>
 </ion-view>

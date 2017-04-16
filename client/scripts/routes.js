@@ -1,9 +1,13 @@
-import {Config} from 'angular-ecmascript/module-helpers';
+import { Config } from 'angular-ecmascript/module-helpers';
 
+// Modules
+import ProductsCtrl from './controllers/products';
+
+// Templates
 import tabsTemplateUrl from '../templates/tabs.html';
 import productsTemplateUrl from '../templates/products.html';
 import productTemplateUrl from '../templates/product.html';
- 
+
 export default class RoutesConfig extends Config {
   configure() {
     this.$stateProvider
@@ -17,7 +21,7 @@ export default class RoutesConfig extends Config {
         views: {
           'tab-products': {
             templateUrl: productsTemplateUrl,
-            controller: 'ProductsCtrl as products'
+            controller: 'ProductsCtrl as productsCtrl'
           }
         }
       })
@@ -25,14 +29,14 @@ export default class RoutesConfig extends Config {
         url: '/product',
         views: {
           'tab-product': {
-            templateUrl: productTemplateUrl,            
-            controller: 'ProductCtrl as product'
+            templateUrl: productTemplateUrl,
+            controller: 'ProductCtrl as productCtrl'
           }
         }
       });
- 
+
     this.$urlRouterProvider.otherwise('tab/products');
   }
 }
- 
+
 RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];

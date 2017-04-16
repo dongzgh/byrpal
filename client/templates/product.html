@@ -1,13 +1,47 @@
 <ion-view view-title="Product">
   <ion-content>
-    <p>This is the Product page.</p>
     <div class="list">
       <label class="item item-input item-select">
-      <div class="input-label">Category</div>
-      <select>
-        <option ng-repeat="category in productCtrl.categories">{{category.name}}</option>
-      </select>
-    </label>
+        <div class="input-label">Category</div>
+        <select>
+          <option ng-repeat="category in productCtrl.categories">{{category.name}}</option>
+        </select>
+      </label>
+      <label class="item item-input">
+        <div class="input-label">Name</div>
+        <input type="text">
+      </label>
+      <label class="item item-input">
+        <div class="input-label">Weight</div>
+        <input type="text">
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">Retailer</div>
+        <select>
+          <option ng-repeat="retailer in productCtrl.retailers">{{retailer.name}}</option>
+        </select>
+      </label>
+      <label class="item item-input">
+        <div class="input-label">Base Price</div>
+        <input type="text">
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">Tax</div>
+        <select>
+          <option>13%</option>
+          <option>8%</option>
+          <option>5%</option>
+          <option>0%</option>
+        </select>
+      </label>
+      <label class="item item-input">
+        <div class="input-label">Profit</div>
+        <input type="text">
+      </label>
+      <label class="item item-input">
+        <div class="input-label">Retail Price</div>
+        <input type="text" disabled="disabled">
+      </label>
     </div>
   </ion-content>
 </ion-view>

@@ -1,0 +1,14 @@
+<ion-view view-title="Orders">
+  <ion-content>
+    <label class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search">
+    </label>
+    <div class="list" ng-repeat="order in ordersCtrl.orders">
+      <a class="item item-thumbnail-left" href="#">
+        <img ng-src="images/{{order.pictures[0]}}" height="150" width="150" />
+        <h2>{{order.name}}</h2>
+        <p>{{order.price}}</p>
+      </a>
+  </ion-content>
+</ion-view>

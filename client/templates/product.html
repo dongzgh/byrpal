@@ -13,7 +13,8 @@
       </label>
       <label class="item item-input">
         <div class="input-label">Weight</div>
-        <input type="text">
+        <input type="number">
+        <span>kg</span>
       </label>
       <label class="item item-input item-select">
         <div class="input-label">Retailer</div>
@@ -22,11 +23,11 @@
         </select>
       </label>
       <label class="item item-input">
-        <div class="input-label">Base Price</div>
-        <input type="text">
+        <div class="input-label">Unit Price</div>
+        <input type="number">
       </label>
       <label class="item item-input item-select">
-        <div class="input-label">Tax</div>
+        <div class="input-label">Tax Rate</div>
         <select>
           <option>13%</option>
           <option>8%</option>
@@ -34,14 +35,28 @@
           <option>0%</option>
         </select>
       </label>
-      <label class="item item-input">
+      <label class="item item-input item-select">
         <div class="input-label">Profit</div>
-        <input type="text">
+         <input type="number">     
+        <select>
+          <option>Percentage</option>
+          <option>Flat</option>
+        </select>             
       </label>
-      <label class="item item-input">
-        <div class="input-label">Retail Price</div>
-        <input type="text" disabled="disabled">
+      <label class="item item-select">
+        <div class="input-label">Estimated Retail Price</div>
+        <select>
+          <option>1 Unit: {{product.estimatedPrices[0]}}</option>
+          <option>2 Unit: {{product.estimatedPrices[1]}}</option>
+          <option>3 Unit: {{product.estimatedPrices[2]}}</option>
+          <option>4 Unit: {{product.estimatedPrices[3]}}</option>
+        </select>
       </label>
+      <div class="button-bar">
+        <a class="button button-icon icon ion-images"></a>
+        <a class="button button-icon icon ion-upload"></a>
+        <a class="button button-icon icon ion-bag"></a>
+      </div>
     </div>
   </ion-content>
 </ion-view>

@@ -11,6 +11,7 @@ import { Meteor } from 'meteor/meteor';
 // Modules
 import ProductsCtrl from './controllers/products';
 import ProductCtrl from './controllers/product';
+import OrdersCtrl from './controllers/orders';
 import CalendarFilter from './filters/calendar';
 import RoutesConfig from './routes';
 
@@ -25,6 +26,7 @@ Angular.module(App, [
 new Loader(App)
   .load(ProductsCtrl)
   .load(ProductCtrl)
+  .load(OrdersCtrl)
   .load(CalendarFilter)
   .load(RoutesConfig);
 

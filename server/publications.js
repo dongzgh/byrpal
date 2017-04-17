@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 // Data.
-import { Products, Categories, Retailers } from '../lib/collections';
+import { Products, Categories, Retailers, Orders } from '../lib/collections';
 
 if (Meteor.isServer) {
   Meteor.publish('products', function () {
@@ -14,5 +14,9 @@ if (Meteor.isServer) {
 
   Meteor.publish('retailers', function () {
     return Retailers.find({});
+  });
+
+  Meteor.publish('orders', function () {
+    return Orders.find({});
   });
 }

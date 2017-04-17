@@ -1,10 +1,17 @@
 <ion-view view-title="Products">
   <ion-content>
+    <label class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search">
+    </label>
     <div class="list" ng-repeat="product in productsCtrl.products">
       <a class="item item-thumbnail-left" href="#">
         <img ng-src="images/{{product.pictures[0]}}" height="150" width="150" />
         <h2>{{product.name}}</h2>
-        <p>{{product.price}}</p>
+        <p>1: {{product.estimatedPrices[0]}}</p>
+        <p>2: {{product.estimatedPrices[1]}}</p>
+        <p>3: {{product.estimatedPrices[2]}}</p>
+        <p>4: {{product.estimatedPrices[3]}}</p>
       </a>
   </ion-content>
 </ion-view>

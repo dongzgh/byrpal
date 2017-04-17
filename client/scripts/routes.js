@@ -7,6 +7,7 @@ import ProductsCtrl from './controllers/products';
 import tabsTemplateUrl from '../templates/tabs.html';
 import productsTemplateUrl from '../templates/products.html';
 import productTemplateUrl from '../templates/product.html';
+import ordersTemplateUrl from '../templates/orders.html';
 
 export default class RoutesConfig extends Config {
   configure() {
@@ -31,6 +32,15 @@ export default class RoutesConfig extends Config {
           'tab-product': {
             templateUrl: productTemplateUrl,
             controller: 'ProductCtrl as productCtrl'
+          }
+        }
+      })
+      .state('tab.orders', {
+        url: '/orders',
+        views: {
+          'tab-orders': {
+            templateUrl: ordersTemplateUrl,
+            controller: 'OrdersCtrl as ordersCtrl'
           }
         }
       });

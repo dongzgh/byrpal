@@ -3,9 +3,7 @@
   "productId":{"$oid":"58f440fe6aec592fea8eceb7"},
   "time": "2016-01-23-12-23-45",
   "quantity": 2,
-  "quotePrice": 33.88,
   "realUnitPrice": 11.99,
   "realTransportationFee": 2,
-  "realExpressFee": 2,
-  "realProfit": 2.78
+  "realExpressFee": 2
 }

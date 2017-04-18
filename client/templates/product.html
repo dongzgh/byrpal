@@ -3,32 +3,32 @@
     <div class="list">
       <label class="item item-input item-select">
         <div class="input-label">Category</div>
-        <select>
+        <select ng-model="productCtrl.category">
           <option ng-repeat="category in productCtrl.categories">{{category.name}}</option>
         </select>
       </label>
       <label class="item item-input">
         <div class="input-label">Name</div>
-        <input type="text">
+        <input type="text" ng-model="productCtrl.name">
       </label>
       <label class="item item-input">
         <div class="input-label">Weight</div>
-        <input type="number">
+        <input type="number" ng-model="productCtrl.weight">
         <span>kg</span>
       </label>
       <label class="item item-input item-select">
         <div class="input-label">Retailer</div>
-        <select>
+        <select ng-model="productCtrl.retailer">
           <option ng-repeat="retailer in productCtrl.retailers">{{retailer.name}}</option>
         </select>
       </label>
       <label class="item item-input">
         <div class="input-label">Unit Price</div>
-        <input type="number">
+        <input type="number" ng-model="productCtrl.unitPrice">
       </label>
       <label class="item item-input item-select">
         <div class="input-label">Tax Rate</div>
-        <select>
+        <select ng-model="productCtrl.taxRate">
           <option>13%</option>
           <option>8%</option>
           <option>5%</option>
@@ -37,19 +37,18 @@
       </label>
       <label class="item item-input item-select">
         <div class="input-label">Profit</div>
-         <input type="number">     
-        <select>
-          <option>Percentage</option>
-          <option>Flat</option>
+         <input type="number" ng-model="productCtrl.profitValue">     
+        <select ng-model="productCtrl.profitModel">
+          <option>percentage</option>
+          <option>flat</option>
         </select>             
-      </label>
+      </label>      
       <label class="item item-select">
-        <div class="input-label">Estimated Retail Price</div>
+        <button class="button" ng-click="productCtrl.estimate()">
+          Estimate Retail Prices
+        </button>
         <select>
-          <option>1 Unit: {{product.estimatedPrices[0]}}</option>
-          <option>2 Unit: {{product.estimatedPrices[1]}}</option>
-          <option>3 Unit: {{product.estimatedPrices[2]}}</option>
-          <option>4 Unit: {{product.estimatedPrices[3]}}</option>
+          <option ng-repeat="retailPrice in productCtrl.retailPrices">{{$index + 1}} Unit: {{retailPrice | number : 2}}</option>
         </select>
       </label>
       <div class="button-bar">

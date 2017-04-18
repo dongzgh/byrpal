@@ -5,5 +5,26 @@
   "quantity": 2,
   "realUnitPrice": 11.99,
   "realTransportationFee": 2,
-  "realExpressFee": 2
+  "realExpressFee": 2,
+  "status": "pending"
+}
+{
+  "client": "Sammi",
+  "productId":{"$oid":"58f440fe6aec592fea8eceb9"},
+  "time": "2016-02-02-14-12-05",
+  "quantity": 5,
+  "realUnitPrice": 16.99,
+  "realTransportationFee": 4,
+  "realExpressFee": 10,
+  "status": "pending"
+}
+{
+  "client": "Dong",
+  "productId":{"$oid":"58f440fe6aec592fea8ecebb"},
+  "time": "2016-03-01-10-05-00",
+  "quantity": 1,
+  "realUnitPrice": 25.99,
+  "realTransportationFee": 3,
+  "realExpressFee": 15,
+  "status": "completed"
 }

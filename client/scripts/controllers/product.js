@@ -56,8 +56,10 @@ export default class ProductCtrl extends Controller {
     this.retailPrices = [];
     let transportationFee = this.evalTransportationFee();
     for (let i = 0; i < 4; i++) {
-      let expressFee = this.evalExpressFee(this.category, this.weight, i + 1);
-      let retailPrice = this.unitPrice * (parseFloat(this.taxRate) + 1.0) + transportationFee + expressFee;
+      let quantity = i + 1;
+      let expressFee = this.evalExpressFee(this.category, this.weight, quantity);
+      let retailPrice = this.unitPrice * (parseFloat(this.taxRate) + 1.0) +
+       expressFee / quantity + transportationFee / quantity;
       if (this.profitModel === "percentage")
         retailPrice = retailPrice * (this.profitValue + 100.0) / 100.0;
       else if (this.profitModel === "flat")

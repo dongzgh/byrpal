@@ -6,7 +6,9 @@
     </label>
     <div class="list" ng-repeat="order in ordersCtrl.orders">
       <a class="item item-thumbnail-left" href="#">
+        <img ng-src="images/{{order.pictures[0]}}" height="150" width="150" />
         <h2>{{order.time}}</h2>
-        <p>{{order.client}}</p>      </a>
+        <p>{{order.client}}</p>
+      </a>
   </ion-content>
 </ion-view>

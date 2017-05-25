@@ -12,12 +12,12 @@ export default class OrdersCtrl extends Controller {
     this.fullOrders = [];
     this.helpers({
       orders() {
-        let dataOrders = Orders.find({}).fetch();
-        dataOrders.forEach(function (dataOrder) {
-          let dataProduct = Products.find({ "_id": dataOrder.productId }).fetch();
-          dataOrder.pictures = dataProduct[0].pictures;
+        let orders = Orders.find({}).fetch();
+        orders.forEach(function (order) {
+          let product = Products.find({ "_id": order.productId }).fetch();
+          order.pictures = product[0].pictures;
         })
-        return dataOrders;
+        return orders;
       }
     });
   }

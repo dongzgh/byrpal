@@ -12,6 +12,8 @@ import { Meteor } from 'meteor/meteor';
 import ProductsCtrl from './controllers/products';
 import ProductCtrl from './controllers/product';
 import OrdersCtrl from './controllers/orders';
+import OrderCtrl from './controllers/order';
+import SettingsCtrl from './controllers/settings';
 import CalendarFilter from './filters/calendar';
 import RoutesConfig from './routes';
 
@@ -27,6 +29,8 @@ new Loader(App)
   .load(ProductsCtrl)
   .load(ProductCtrl)
   .load(OrdersCtrl)
+  .load(OrderCtrl)
+  .load(SettingsCtrl)
   .load(CalendarFilter)
   .load(RoutesConfig);
 

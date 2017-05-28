@@ -17,7 +17,7 @@ export default class SettingsCtrl extends Controller {
     this.firstPoundWaveCondition = 0;
     this.priceUnit = "CAD$";
     this.package = 1;
-    this.customTarrif = 0.12;
+    this.customTarif = 0.12;
 
     // Helpers.
     this.helpers({

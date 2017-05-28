@@ -5,10 +5,15 @@
       <input type="text" placeholder="Search">
     </label>
     <div class="list" ng-repeat="order in ordersCtrl.orders">
-      <a class="item item-thumbnail-left" href="#">
-        <img ng-src="images/{{order.pictures[0]}}" height="150" width="150" />
-        <h2>{{order.time}}</h2>
-        <p>{{order.client}}</p>
-      </a>
+      <a href="#">{{order.client}} : {{order.time}}</a>
+      <button class="icon ion-briefcase"></button>
+      <div class="list" ng-repeat="item in order.items">
+        <div class="item item-thumbnail-left">
+          <img ng-src="images/{{item.pictures[0]}}" height="150" width="150" />        
+          <p>{{item.quantity}}</p>
+          <button class="icon ion-bag"></button>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

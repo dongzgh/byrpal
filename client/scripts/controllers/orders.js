@@ -9,13 +9,14 @@ export default class OrdersCtrl extends Controller {
     super(...arguments);
     this.subscribe('products');
     this.subscribe('orders');
-    this.fullOrders = [];
     this.helpers({
       orders() {
         let orders = Orders.find({}).fetch();
         orders.forEach(function (order) {
-          let product = Products.find({ "_id": order.productId }).fetch();
-          order.pictures = product[0].pictures;
+          order.items.forEach(function (item) {
+            let product = Products.find({ "_id": item.productId }).fetch();
+            item.pictures = product[0].pictures;
+          })
         })
         return orders;
       }

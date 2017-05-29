@@ -6,33 +6,14 @@
         <input type="text" ng-model="orderCtrl.client">
       </label>
       <label class="item item-input">
-        <div class="input-label">Name</div>
-        <input type="text" ng-model="orderCtrl.name">
-      </label>
-      <label class="item item-input">
-        <div class="input-label">Quantity</div>
-        <input type="text" ng-model="orderCtrl.quantity">
-      </label>
-      <label class="item item-input">
         <div class="input-label">Total Price</div>
         <input type="text" ng-model="orderCtrl.totalPrice">
       </label>
-      <label class="item item-input">
-        <div class="input-label">Real Unit Price</div>
-        <input type="text" ng-model="orderCtrl.realUnitPrice">
-      </label>
-      <label class="item item-input">
-        <div class="input-label">Real Transportation Fee</div>
-        <input type="text" ng-model="orderCtrl.realTransportationFee">
-      </label>
-      <label class="item item-input">
-        <div class="input-label">Real Express Fee</div>
-        <input type="text" ng-model="orderCtrl.realExpressFee">
-      </label>
-      <label class="item item-input">
-        <div class="input-label">Status</div>
-        <input type="text" ng-model="orderCtrl.status">
-      </label>
+      <div class="list" ng-repeat="item in orderCtrl.items">
+        <img ng-src="images/{{item.pictures[0]}}" height="150" width="150" />
+        <p>{{item.name}}: {{item.quantity}}</p>
+        <button class="icon ion-minus"></button>
+      </div>
       <div class="button-bar">
         <a class="button button-icon icon ion-archive"></a>
         <a class="button button-icon icon ion-clipboard"></a>

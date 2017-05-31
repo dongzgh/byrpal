@@ -10,9 +10,11 @@
         <input type="text" ng-model="orderCtrl.totalPrice">
       </label>
       <div class="list" ng-repeat="item in orderCtrl.items">
-        <img ng-src="images/{{item.picture}}" height="150" width="150" />
-        <p>{{item.name}} : {{item.quantity}}</p>
-        <button class="icon ion-minus"></button>
+        <div class="item item-thumbnail-left">
+          <img ng-src="images/{{item.picture}}" height="150" width="150" />
+          <p>{{item.name}} : {{item.quantity}}</p>
+          <button class="icon ion-minus"></button>
+        </div>
       </div>
       <div class="button-bar">
         <a class="button button-icon icon ion-archive"></a>

@@ -16,8 +16,9 @@ export default class OrdersCtrl extends Controller {
         let orders = Orders.find({}).fetch();
         orders.forEach(function (order) {
           order.items.forEach(function (item) {
-            let product = Products.find({ "_id": item.productId }).fetch();
-            item.pictures = product[0].pictures;
+            let product = Products.findOne({ _id: item.id });
+            item.picture = product.pictures[0];
+            item.name = product.name;
           })
         })
         return orders;

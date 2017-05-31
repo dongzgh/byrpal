@@ -2,15 +2,15 @@ import Moment from 'moment';
 import { Controller } from 'angular-ecmascript/module-helpers';
 
 // Data.
-import { Categories, Retailers } from '../../../lib/collections';
+import { Categories } from '../../../lib/collections';
 
 export default class SettingsCtrl extends Controller {
   // Construction.
   constructor() {
     super(...arguments);
-
-    // Fields.
     this.subscribe('categories');
+
+    // Fields.    
     this.transportationFee = 0;
     this.firstPound = 0;
     this.restPound = 0;

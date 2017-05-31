@@ -9,6 +9,8 @@ export default class OrdersCtrl extends Controller {
     super(...arguments);
     this.subscribe('products');
     this.subscribe('orders');
+
+    // Helpers.
     this.helpers({
       orders() {
         let orders = Orders.find({}).fetch();
@@ -21,7 +23,7 @@ export default class OrdersCtrl extends Controller {
         return orders;
       }
     });
-  }
+  };
 }
 
 OrdersCtrl.$name = 'OrdersCtrl';

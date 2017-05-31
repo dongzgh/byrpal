@@ -8,10 +8,10 @@ export default class ProductCtrl extends Controller {
   // Construction.
   constructor() {
     super(...arguments);
-
-    // Fields.
     this.subscribe('categories');
     this.subscribe('retailers');
+
+    // Fields.    
     this.category = "supplement";
     this.name = "";
     this.weight = 0.0;

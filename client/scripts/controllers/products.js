@@ -9,6 +9,8 @@ export default class ProductsCtrl extends Controller {
     super(...arguments);
     this.subscribe('products');
     this.subscribe('order');
+
+    // Helpers.
     this.helpers({
       products() {
         return Products.find({});
@@ -17,18 +19,22 @@ export default class ProductsCtrl extends Controller {
   };
 
   order(product) {
-    let item = Order.find({ "productId": product._id }).fetch();
-    if (item.length === 0) {
+    let selector = { id: product._id };
+    let item = Order.findOne(selector);
+    if (item === undefined) {
       Order.insert({
-        "productId": product._id,
-        "name": product.name,
-        "picture": product.pictures[0],
-        "quantity": 1
+        id: product._id,
+        name: product.name,
+        picture: product.pictures[0],
+        quantity: 1
       })
     } else {
-      console.log("update record!")
+      Order.update(
+        { _id: item._id },
+        { $inc: { quantity: 1 } }
+      )
     }
-  }
+  };
 }
 
 ProductsCtrl.$name = 'ProductsCtrl';

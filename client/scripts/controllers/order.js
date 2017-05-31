@@ -8,15 +8,15 @@ export default class OrderCtrl extends Controller {
   // Construction.
   constructor() {
     super(...arguments);
-
-    // Fields.
     this.subscribe('order');
+
+    // Fields.    
     this.client = 'Tom';
     this.totalPrice = 0;
 
     // Helpers.
     this.helpers({
-      items(){
+      items() {
         return Order.find({});
       }
     });

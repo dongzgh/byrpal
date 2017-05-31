@@ -10,8 +10,8 @@
         <input type="text" ng-model="orderCtrl.totalPrice">
       </label>
       <div class="list" ng-repeat="item in orderCtrl.items">
-        <img ng-src="images/{{item.pictures[0]}}" height="150" width="150" />
-        <p>{{item.name}}: {{item.quantity}}</p>
+        <img ng-src="images/{{item.picture}}" height="150" width="150" />
+        <p>{{item.name}} : {{item.quantity}}</p>
         <button class="icon ion-minus"></button>
       </div>
       <div class="button-bar">

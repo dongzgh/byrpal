@@ -2,6 +2,10 @@ import { Config } from 'angular-ecmascript/module-helpers';
 
 // Modules
 import ProductsCtrl from './controllers/products';
+import ProductCtrl from './controllers/product';
+import OrdersCtrl from './controllers/orders';
+import OrderCtrl from './controllers/order';
+import SettingsCtrl from './controllers/settings';
 
 // Templates
 import tabsTemplateUrl from '../templates/tabs.html';

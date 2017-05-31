@@ -19,13 +19,10 @@ export default class ProductsCtrl extends Controller {
   };
 
   order(product) {
-    let selector = { id: product._id };
-    let item = Order.findOne(selector);
+    let item = Order.findOne({ id: product._id });
     if (item === undefined) {
       Order.insert({
         id: product._id,
-        name: product.name,
-        picture: product.pictures[0],
         quantity: 1
       })
     } else {

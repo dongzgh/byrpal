@@ -19,14 +19,25 @@ export default class OrderCtrl extends Controller {
     this.helpers({
       items() {
         let items = Order.find({}).fetch();
-        items.forEach(function(item){
-          let product = Products.findOne({_id: item.id});
+        items.forEach(function (item) {
+          let product = Products.findOne({ _id: item.id });
           item.picture = product.pictures[0];
           item.name = product.name;
         });
         return items;
       }
     });
+  };
+
+  remove(item) {
+    if (item.quantity > 1) {
+      Order.update(
+        { _id: item._id },
+        { $inc: { quantity: -1 } }
+      );
+    } else {
+      Order.remove({ _id: item._id });
+    }    
   };
 }
 

@@ -31,7 +31,9 @@ export default class ProductsCtrl extends Controller {
         { $inc: { quantity: 1 } }
       )
     }
+    this.$rootScope.$broadcast('order.updateTotalPrice');
   };
 }
 
 ProductsCtrl.$name = 'ProductsCtrl';
+ProductsCtrl.$inject = ['$rootScope'];

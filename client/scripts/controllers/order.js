@@ -15,7 +15,10 @@ export default class OrderCtrl extends Controller {
 
     // Fields.    
     this.client = 'Min';
-    this.totalPrice = 0;
+    this.totalPrice = 0.0;
+
+    // Listeners.
+    this.$rootScope.$on('order.updateTotalPrice', this.updateTotalPrice);
 
     // Helpers.
     this.helpers({
@@ -31,19 +34,23 @@ export default class OrderCtrl extends Controller {
     });
   };
 
-  updateTotalPrice(id, quantity) {
-    let product = Products.find({ _id: id });
-    let unitPrice = 0;
-    if (quantity === 1) {
-      unitPrice = product.estimatedPrices[0];
-    } else if (quantity === 2) {
-      unitPrice = product.estimatedPrices[1];
-    } else if (quantity === 3) {
-      unitPrice = product.estimatedPrices[2];
-    } else if (quantity >= 4) {
-      unitPrice = product.estimatedPrices[3];
-    }
-    this.totalPrice = unitPrice * quantity;
+  updateTotalPrice() {
+    let items = Order.find({}).fetch();
+    this.totalPrice = 0.0;
+    items.forEach(function (item) {
+      let product = Products.findOne({ _id: item.id });
+      let unitPrice = 0;
+      if (item.quantity === 1) {
+        unitPrice = product.estimatedPrices[0];
+      } else if (item.quantity === 2) {
+        unitPrice = product.estimatedPrices[1];
+      } else if (item.quantity === 3) {
+        unitPrice = product.estimatedPrices[2];
+      } else if (item.quantity >= 4) {
+        unitPrice = product.estimatedPrices[3];
+      }
+      this.totalPrice += unitPrice * item.quantity;
+    });
   }
 
   remove(item) {
@@ -74,3 +81,4 @@ export default class OrderCtrl extends Controller {
 }
 
 OrderCtrl.$name = 'OrderCtrl';
+OrderCtrl.$inject = ['$rootScope'];

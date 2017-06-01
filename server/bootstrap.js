@@ -1,4 +1,12 @@
-import {Meteor} from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 
-Meteor.startup(function() { 
+// Data.
+import { Order } from '../lib/collections';
+
+Meteor.startup(function () {
+  return Meteor.methods({
+      "order.Empty": function () {
+        return Order.remove({});
+      }
+    });
 });

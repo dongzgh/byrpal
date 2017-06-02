@@ -25,6 +25,19 @@ export default class ProductCtrl extends Controller {
     this.profitValue = 10;
     this.profitModel = "percentage";
     this.retailPrices = [];
+    this.uploader = new this.FileUploader({
+      url: '/uploaded',
+      autoUpload: true,
+      onProgressItem: function(item, progress) {
+        console.log(progress);
+      },
+      onSuccessItem: function(item, response, status, headers){
+        console.log(item);
+      },
+      onErrorItem: function(item, response, status, headers){
+        console.log(item);
+      }
+    })
 
     // Helpers.
     this.helpers({
@@ -76,3 +89,4 @@ export default class ProductCtrl extends Controller {
 
 // Declarations.
 ProductCtrl.$name = 'ProductCtrl';
+ProductCtrl.$inject = ['FileUploader'];

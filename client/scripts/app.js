@@ -7,6 +7,7 @@ import 'angular-sanitize';
 import 'angular-ui-router';
 import { Meteor } from 'meteor/meteor';
 import 'ionic-scripts';
+import 'angular-file-upload';
 
 // Modules
 import ProductsCtrl from './controllers/products';
@@ -21,6 +22,7 @@ import RoutesConfig from './routes';
 const App = 'ShopAgent';
 Angular.module(App, [
   'angular-meteor',
+  'angularFileUpload',
   'ionic'
 ]);
 

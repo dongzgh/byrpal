@@ -51,6 +51,10 @@
           <option ng-repeat="retailPrice in productCtrl.retailPrices">{{$index + 1}} Unit: {{retailPrice | number : 2}}</option>
         </select>
       </label>
+      <input type="file" nv-file-select uploader="productCtrl.uploader" multiple>
+      <li ng-repeat="item in productCtrl.uploader.queue">
+        <p>{{item.file.name}}</p>
+      </li>
       <div class="button-bar">
         <a class="button button-icon icon ion-images"></a>
         <a class="button button-icon icon ion-archive"></a>

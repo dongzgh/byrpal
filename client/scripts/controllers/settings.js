@@ -5,7 +5,7 @@ import Moment from 'moment';
 // Data.
 import { Categories } from '../../../lib/collections';
 
-// Class definitions.
+// Controller definitions.
 export default class SettingsCtrl extends Controller {
   // Construction.
   constructor() {

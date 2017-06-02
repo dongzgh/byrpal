@@ -1,24 +1,26 @@
-import Moment from 'moment';
+// System.
 import { Controller } from 'angular-ecmascript/module-helpers';
 import { Meteor } from 'meteor/meteor';
+import Moment from 'moment';
 
 // Data.
 import { Products, Orders, Order } from '../../../lib/collections';
 
+// Controller definition.
 export default class OrderCtrl extends Controller {
-  // Construction.
+  // Constructor.
   constructor() {
     super(...arguments);
+    let scope = this;
+
+    // Subscriptions.    
     this.subscribe('products');
     this.subscribe('orders');
     this.subscribe('order');
 
-    // Fields.    
+    // Fields.
     this.client = 'Min';
     this.totalPrice = 0.0;
-
-    // Listeners.
-    this.$rootScope.$on('order.updateTotalPrice', this.updateTotalPrice);
 
     // Helpers.
     this.helpers({
@@ -32,27 +34,29 @@ export default class OrderCtrl extends Controller {
         return items;
       }
     });
+
+    // Listeners.
+    this.$rootScope.$on('order.updateTotalPrice', function(){
+      let items = Order.find({}).fetch();
+      scope.totalPrice = 0.0;
+      items.forEach(function (item) {
+        let product = Products.findOne({ _id: item.id });
+        let unitPrice = 0;
+        if (item.quantity === 1) {
+          unitPrice = product.estimatedPrices[0];
+        } else if (item.quantity === 2) {
+          unitPrice = product.estimatedPrices[1];
+        } else if (item.quantity === 3) {
+          unitPrice = product.estimatedPrices[2];
+        } else if (item.quantity >= 4) {
+          unitPrice = product.estimatedPrices[3];
+        }
+        scope.totalPrice += unitPrice * item.quantity;
+      });
+    });
   };
 
-  updateTotalPrice() {
-    let items = Order.find({}).fetch();
-    this.totalPrice = 0.0;
-    items.forEach(function (item) {
-      let product = Products.findOne({ _id: item.id });
-      let unitPrice = 0;
-      if (item.quantity === 1) {
-        unitPrice = product.estimatedPrices[0];
-      } else if (item.quantity === 2) {
-        unitPrice = product.estimatedPrices[1];
-      } else if (item.quantity === 3) {
-        unitPrice = product.estimatedPrices[2];
-      } else if (item.quantity >= 4) {
-        unitPrice = product.estimatedPrices[3];
-      }
-      this.totalPrice += unitPrice * item.quantity;
-    });
-  }
-
+  // Remove item.
   remove(item) {
     if (item.quantity > 1) {
       Order.update(
@@ -64,6 +68,7 @@ export default class OrderCtrl extends Controller {
     }
   };
 
+  // Save order.
   save() {
     let items = Order.find({}).fetch();
     items.forEach(function (item) {
@@ -77,8 +82,10 @@ export default class OrderCtrl extends Controller {
     };
     Orders.insert(item);
     Meteor.call('order.Empty');
+    this.totalPrice = 0.0;
   };
 }
 
+// Declaration.
 OrderCtrl.$name = 'OrderCtrl';
 OrderCtrl.$inject = ['$rootScope'];

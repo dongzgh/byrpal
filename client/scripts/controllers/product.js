@@ -1,13 +1,17 @@
-import Moment from 'moment';
+// System.
 import { Controller } from 'angular-ecmascript/module-helpers';
+import Moment from 'moment';
 
 // Data.
 import { Categories, Retailers } from '../../../lib/collections';
 
+// Controller definition.
 export default class ProductCtrl extends Controller {
   // Construction.
   constructor() {
     super(...arguments);
+
+    // Subscriptions.
     this.subscribe('categories');
     this.subscribe('retailers');
 
@@ -50,6 +54,7 @@ export default class ProductCtrl extends Controller {
     return 2.0 // DONG: flat for now.
   };
 
+  // Estimate retail prices.
   estimate() {
     if (this.weight === 0) return;
     if (this.unitPrice === 0) return;
@@ -69,4 +74,5 @@ export default class ProductCtrl extends Controller {
   };
 }
 
+// Declarations.
 ProductCtrl.$name = 'ProductCtrl';

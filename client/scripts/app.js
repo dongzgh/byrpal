@@ -1,12 +1,12 @@
-// Libs
+// System.
+import Angular from 'angular';
+import Loader from 'angular-ecmascript/module-loader';
 import 'angular-animate';
 import 'angular-meteor';
 import 'angular-sanitize';
 import 'angular-ui-router';
-import 'ionic-scripts';
-import Angular from 'angular';
-import Loader from 'angular-ecmascript/module-loader';
 import { Meteor } from 'meteor/meteor';
+import 'ionic-scripts';
 
 // Modules
 import ProductsCtrl from './controllers/products';
@@ -17,9 +17,8 @@ import SettingsCtrl from './controllers/settings';
 import CalendarFilter from './filters/calendar';
 import RoutesConfig from './routes';
 
-const App = 'ShopAgent';
-
 // App
+const App = 'ShopAgent';
 Angular.module(App, [
   'angular-meteor',
   'ionic'

@@ -1,13 +1,17 @@
-import Moment from 'moment';
+// System.
 import { Controller } from 'angular-ecmascript/module-helpers';
+import Moment from 'moment';
 
 // Data.
 import { Categories } from '../../../lib/collections';
 
+// Class definitions.
 export default class SettingsCtrl extends Controller {
   // Construction.
   constructor() {
     super(...arguments);
+
+    // Subscriptions.
     this.subscribe('categories');
 
     // Fields.    
@@ -28,4 +32,5 @@ export default class SettingsCtrl extends Controller {
   };
 }
 
+// Declarations.
 SettingsCtrl.$name = 'SettingsCtrl';

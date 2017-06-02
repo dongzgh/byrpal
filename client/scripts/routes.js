@@ -1,3 +1,4 @@
+// System.
 import { Config } from 'angular-ecmascript/module-helpers';
 
 // Modules
@@ -15,6 +16,7 @@ import ordersTemplateUrl from '../templates/orders.html';
 import orderTemplateUrl from '../templates/order.html';
 import settingsTemplateUrl from '../templates/settings.html';
 
+// Config definition.
 export default class RoutesConfig extends Config {
   configure() {
     this.$stateProvider
@@ -73,4 +75,5 @@ export default class RoutesConfig extends Config {
   }
 }
 
+// Declarations.
 RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];

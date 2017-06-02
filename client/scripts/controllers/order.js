@@ -78,6 +78,7 @@ export default class OrderCtrl extends Controller {
       client: this.client,
       time: Moment().format('MMMM Do YYYY, h:mm:ss a'),
       items: items,
+      totalPrice: this.totalPrice,
       status: "pending"
     };
     Orders.insert(item);

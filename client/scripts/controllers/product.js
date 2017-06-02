@@ -3,7 +3,7 @@ import { Controller } from 'angular-ecmascript/module-helpers';
 import Moment from 'moment';
 
 // Data.
-import { Categories, Retailers } from '../../../lib/collections';
+import { Categories, Retailers, Images } from '../../../lib/collections';
 
 // Controller definition.
 export default class ProductCtrl extends Controller {
@@ -64,7 +64,7 @@ export default class ProductCtrl extends Controller {
       let quantity = i + 1;
       let expressFee = this.evalExpressFee(this.category, this.weight, quantity);
       let retailPrice = this.unitPrice * (parseFloat(this.taxRate) + 1.0) +
-       expressFee / quantity + transportationFee / quantity;
+        expressFee / quantity + transportationFee / quantity;
       if (this.profitModel === "percentage")
         retailPrice = retailPrice * (this.profitValue + 100.0) / 100.0;
       else if (this.profitModel === "flat")

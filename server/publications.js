@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 // Data.
-import { Products, Categories, Retailers, Orders, Order } from '../lib/collections';
+import { Products, Categories, Retailers, Orders, Order, Images } from '../lib/collections';
 
 if (Meteor.isServer) {
   Meteor.publish('products', function () {
@@ -20,7 +20,11 @@ if (Meteor.isServer) {
     return Orders.find({});
   });
 
-   Meteor.publish('order', function () {
+  Meteor.publish('order', function () {
     return Order.find({});
+  });
+
+  Meteor.publish('images', function () {
+    return Images.find({});
   });
 }

@@ -30,6 +30,11 @@ export default class OrdersCtrl extends Controller {
       }
     });
   };
+
+  // Remove order.
+  remove(order) {
+    Orders.remove({_id: order._id});
+  };
 }
 
 // Declarations.

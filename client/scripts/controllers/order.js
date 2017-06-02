@@ -76,7 +76,7 @@ export default class OrderCtrl extends Controller {
     });
     let item = {
       client: this.client,
-      time: Moment().format(),
+      time: Moment().format('MMMM Do YYYY, h:mm:ss a'),
       items: items,
       status: "pending"
     };

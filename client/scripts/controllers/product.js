@@ -10,6 +10,7 @@ export default class ProductCtrl extends Controller {
   // Construction.
   constructor() {
     super(...arguments);
+    let scope = this;
 
     // Subscriptions.
     this.subscribe('categories');
@@ -25,6 +26,7 @@ export default class ProductCtrl extends Controller {
     this.profitValue = 10;
     this.profitModel = "percentage";
     this.retailPrices = [];
+    this.pictures = [];
 
     // Helpers.
     this.helpers({
@@ -38,12 +40,15 @@ export default class ProductCtrl extends Controller {
         return new this.FileUploader({
           autoUpload: true,
           onSuccessItem: function (item, response, status, headers) {
-            let reader = new FileReader();
-            reader.onload = function (event) {
-              var buffer = new Uint8Array(reader.result)
-              Meteor.call('product.upload', item.file.name, buffer);
+            if (scope.pictures.indexOf(item.file.name) === -1) {
+              scope.pictures.push(item.file.name);
+              let reader = new FileReader();
+              reader.onload = function (event) {
+                var buffer = new Uint8Array(reader.result)
+                Meteor.call('product.upload', item.file.name, buffer);
+              }
+              reader.readAsArrayBuffer(item._file);
             }
-            reader.readAsArrayBuffer(item._file);
           }
         })
       }

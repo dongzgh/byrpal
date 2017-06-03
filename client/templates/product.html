@@ -2,32 +2,32 @@
   <ion-content>
     <div class="list">
       <label class="item item-input item-select">
-        <div class="input-label">Category</div>
+        <span class="input-label">Category</span>
         <select ng-model="productCtrl.category">
           <option ng-repeat="category in productCtrl.categories">{{category.name}}</option>
         </select>
       </label>
       <label class="item item-input">
-        <div class="input-label">Name</div>
+        <span class="input-label">Name</span>
         <input type="text" ng-model="productCtrl.name">
       </label>
       <label class="item item-input">
-        <div class="input-label">Weight</div>
+        <span class="input-label">Weight</span>
         <input type="number" ng-model="productCtrl.weight">
         <span>kg</span>
       </label>
       <label class="item item-input item-select">
-        <div class="input-label">Retailer</div>
+        <span class="input-label">Retailer</span>
         <select ng-model="productCtrl.retailer">
           <option ng-repeat="retailer in productCtrl.retailers">{{retailer.name}}</option>
         </select>
       </label>
       <label class="item item-input">
-        <div class="input-label">Unit Price</div>
+        <span class="input-label">Unit Price</span>
         <input type="number" ng-model="productCtrl.unitPrice">
       </label>
       <label class="item item-input item-select">
-        <div class="input-label">Tax Rate</div>
+        <span class="input-label">Tax Rate</span>
         <select ng-model="productCtrl.taxRate">
           <option>13%</option>
           <option>8%</option>
@@ -36,25 +36,29 @@
         </select>
       </label>
       <label class="item item-input item-select">
-        <div class="input-label">Profit</div>
+        <span class="input-label">Profit</span>
         <input type="number" ng-model="productCtrl.profitValue">     
         <select ng-model="productCtrl.profitModel">
           <option>percentage</option>
           <option>flat</option>
         </select>
       </label>
-      <label class="item item-select">
-        <button class="button" ng-click="productCtrl.estimate()">
+      <label class="item item-input item-select">
+        <button class="button button-outline button-positive" ng-click="productCtrl.estimate()">
           Estimate Retail Prices
         </button>
         <select>
           <option ng-repeat="retailPrice in productCtrl.retailPrices">{{$index + 1}} Unit: {{retailPrice | number : 2}}</option>
         </select>
       </label>
-      <input type="file" nv-file-select uploader="productCtrl.uploader" multiple>
-      <li ng-repeat="item in productCtrl.uploader.queue">
-        <p>{{item.file.name}}</p>
-      </li>
+      <label class="item item-input item-select">
+        <input type="file" nv-file-select uploader="productCtrl.uploader" multiple>
+        <select>
+          <option ng-repeat="picture in productCtrl.pictures">
+            {{picture}}
+          </option>
+        </select>
+      </label>
       <div class="button-bar">
         <a class="button button-icon icon ion-images"></a>
         <a class="button button-icon icon ion-archive"></a>

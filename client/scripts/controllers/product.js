@@ -25,19 +25,6 @@ export default class ProductCtrl extends Controller {
     this.profitValue = 10;
     this.profitModel = "percentage";
     this.retailPrices = [];
-    this.uploader = new this.FileUploader({
-      url: '/uploaded',
-      autoUpload: true,
-      onProgressItem: function(item, progress) {
-        console.log(progress);
-      },
-      onSuccessItem: function(item, response, status, headers){
-        console.log(item);
-      },
-      onErrorItem: function(item, response, status, headers){
-        console.log(item);
-      }
-    })
 
     // Helpers.
     this.helpers({
@@ -46,6 +33,19 @@ export default class ProductCtrl extends Controller {
       },
       retailers() {
         return Retailers.find({});
+      },
+      uploader() {
+        return new this.FileUploader({
+          autoUpload: true,
+          onSuccessItem: function (item, response, status, headers) {
+            let reader = new FileReader();
+            reader.onload = function (event) {
+              var buffer = new Uint8Array(reader.result)
+              Meteor.call('product.upload', item.file.name, buffer);
+            }
+            reader.readAsArrayBuffer(item._file);
+          }
+        })
       }
     });
   };

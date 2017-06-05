@@ -16,17 +16,22 @@ export default class ProductCtrl extends Controller {
     this.subscribe('categories');
     this.subscribe('retailers');
 
-    // Fields.    
-    this.category = "supplement";
-    this.name = "";
+    // Fields.
+    this.name = "";  
+    this.tags = "";
+    this.pictures = [];
+    this.description = "";
     this.weight = 0.0;
-    this.retailer = "costco";
     this.unitPrice = 0.0;
     this.taxRate = "13%";
     this.profitValue = 10;
-    this.profitModel = "percentage";
-    this.retailPrices = [];
-    this.pictures = [];
+    this.profitModel = "ratio";
+    this.exprsFirstPoundFee = 8.0;
+    this.exprsRestPoundsFee = 5.0;
+    this.exprsMinFee = 13.0;
+    this.exprsWaiverMinPounds = 4.0;
+    this.transFlatRate = 4.0;
+    this.retailPrices = [];    
 
     // Helpers.
     this.helpers({
@@ -69,7 +74,7 @@ export default class ProductCtrl extends Controller {
 
   // Estimate transortaion fee.
   evalTransportationFee() {
-    return 2.0 // DONG: flat for now.
+    return 4.0 // DONG: flat for now.
   };
 
   // Estimate retail prices.
@@ -81,9 +86,9 @@ export default class ProductCtrl extends Controller {
     for (let i = 0; i < 4; i++) {
       let quantity = i + 1;
       let expressFee = this.evalExpressFee(this.category, this.weight, quantity);
-      let retailPrice = this.unitPrice * (parseFloat(this.taxRate) + 1.0) +
+      let retailPrice = this.unitPrice * (parseFloat(this.taxRate) / 100.0 + 1.0) +
         expressFee / quantity + transportationFee / quantity;
-      if (this.profitModel === "percentage")
+      if (this.profitModel === "ratio")
         retailPrice = retailPrice * (this.profitValue + 100.0) / 100.0;
       else if (this.profitModel === "flat")
         retailPrice = retailPrice + this.profitValue;

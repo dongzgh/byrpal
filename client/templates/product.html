@@ -1,26 +1,34 @@
 <ion-view view-title="Product">
   <ion-content>
     <div class="list">
-      <label class="item item-input item-select">
-        <span class="input-label">Category</span>
-        <select ng-model="productCtrl.category">
-          <option ng-repeat="category in productCtrl.categories">{{category.name}}</option>
-        </select>
-      </label>
+      <div class="item item-divider">
+        Product Related
+      </div>
       <label class="item item-input">
         <span class="input-label">Name</span>
         <input type="text" ng-model="productCtrl.name">
       </label>
       <label class="item item-input">
+        <span class="input-label">Tags</span>
+        <input type="text" ng-model="productCtrl.tags">
+      </label>
+      <label class="item item-input item-select">
+        <span class="input-label">Pictures</span>
+        <input type="file" nv-file-select uploader="productCtrl.uploader" multiple>
+        <select>
+          <option ng-repeat="picture in productCtrl.pictures">
+            {{picture}}
+          </option>
+        </select>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Description</span>
+        <textarea rows="4" ng-model="productCtrl.description">
+      </label>
+      <label class="item item-input">
         <span class="input-label">Weight</span>
         <input type="number" ng-model="productCtrl.weight">
         <span>kg</span>
-      </label>
-      <label class="item item-input item-select">
-        <span class="input-label">Retailer</span>
-        <select ng-model="productCtrl.retailer">
-          <option ng-repeat="retailer in productCtrl.retailers">{{retailer.name}}</option>
-        </select>
       </label>
       <label class="item item-input">
         <span class="input-label">Unit Price</span>
@@ -39,9 +47,35 @@
         <span class="input-label">Profit</span>
         <input type="number" ng-model="productCtrl.profitValue">     
         <select ng-model="productCtrl.profitModel">
-          <option>percentage</option>
-          <option>flat</option>
+          <option>By Ratio</option>
+          <option>Flat Rate</option>
         </select>
+      </label>
+      <div class="item item-divider">
+        Express Related
+      </div>
+      <label class="item item-input">
+        <span class="input-label">First lb</span>
+        <input type="number" ng-model="productCtrl.exprsFirstPoundFee">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Rest lbs</span>
+        <input type="number" ng-model="productCtrl.exprsRestPoundsFee">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Minimum Fee</span>
+        <input type="number" ng-model="productCtrl.exprsMinFee">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Waiver Min lbs</span>
+        <input type="number" ng-model="productCtrl.exprsWaiverMinPounds">
+      </label>
+      <div class="item item-divider">
+        Transportation Related
+      </div>
+      <label class="item item-input">
+        <span class="input-label">Flat Rate</span>
+        <input type="number" ng-model="productCtrl.transFlatRate">
       </label>
       <label class="item item-input item-select">
         <button class="button button-outline button-positive" ng-click="productCtrl.estimate()">
@@ -51,16 +85,7 @@
           <option ng-repeat="retailPrice in productCtrl.retailPrices">{{$index + 1}} Unit: {{retailPrice | number : 2}}</option>
         </select>
       </label>
-      <label class="item item-input item-select">
-        <input type="file" nv-file-select uploader="productCtrl.uploader" multiple>
-        <select>
-          <option ng-repeat="picture in productCtrl.pictures">
-            {{picture}}
-          </option>
-        </select>
-      </label>
       <div class="button-bar">
-        <a class="button button-icon icon ion-images"></a>
         <a class="button button-icon icon ion-archive"></a>
       </div>
     </div>

@@ -38,17 +38,18 @@ export default class OrderCtrl extends Controller {
     // Listeners.
     this.$rootScope.$on('order.updateTotalPrice', function(){
       let items = Order.find({}).fetch();
+      let quantity = items.length;
       scope.totalPrice = 0.0;
       items.forEach(function (item) {
         let product = Products.findOne({ _id: item.id });
         let unitPrice = 0;
-        if (item.quantity === 1) {
+        if (quantity === 1) {
           unitPrice = product.estimatedPrices[0];
-        } else if (item.quantity === 2) {
+        } else if (quantity === 2) {
           unitPrice = product.estimatedPrices[1];
-        } else if (item.quantity === 3) {
+        } else if (quantity === 3) {
           unitPrice = product.estimatedPrices[2];
-        } else if (item.quantity >= 4) {
+        } else if (quantity >= 4) {
           unitPrice = product.estimatedPrices[3];
         }
         scope.totalPrice += unitPrice * item.quantity;

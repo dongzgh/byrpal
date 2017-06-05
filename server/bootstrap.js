@@ -12,7 +12,7 @@ Meteor.startup(function () {
 
     'product.upload': function (name, buffer) {
       var fs = Npm.require('fs');
-      let dir = './uploaded';
+      let dir = '../web.browser/app/images';
       if(!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
       }

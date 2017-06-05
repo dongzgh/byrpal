@@ -3,7 +3,7 @@ import { Controller } from 'angular-ecmascript/module-helpers';
 import Moment from 'moment';
 
 // Data.
-import { Categories, Retailers, Images } from '../../../lib/collections';
+import { Products } from '../../../lib/collections';
 
 // Controller definition.
 export default class ProductCtrl extends Controller {
@@ -12,12 +12,11 @@ export default class ProductCtrl extends Controller {
     super(...arguments);
     let scope = this;
 
-    // Subscriptions.
-    this.subscribe('categories');
-    this.subscribe('retailers');
+    // Subscriptions.    
+    this.subscribe('products');
 
     // Fields.
-    this.name = "";  
+    this.name = "";
     this.tags = "";
     this.pictures = [];
     this.description = "";
@@ -30,71 +29,84 @@ export default class ProductCtrl extends Controller {
     this.exprsRestPoundsFee = 5.0;
     this.exprsMinFee = 13.0;
     this.exprsWaiverMinPounds = 4.0;
+    this.exprsWeightUnit = 0.5;
+    this.exprsAdditionalFee = 0.0;
     this.transFlatRate = 4.0;
-    this.retailPrices = [];    
+    this.transAdditionalFee = 0.0;
+    this.retailPrices = [];
 
     // Helpers.
     this.helpers({
-      categories() {
-        return Categories.find({});
-      },
-      retailers() {
-        return Retailers.find({});
-      },
       uploader() {
         return new this.FileUploader({
           autoUpload: true,
           onSuccessItem: function (item, response, status, headers) {
-            if (scope.pictures.indexOf(item.file.name) === -1) {
-              scope.pictures.push(item.file.name);
-              let reader = new FileReader();
-              reader.onload = function (event) {
-                var buffer = new Uint8Array(reader.result)
-                Meteor.call('product.upload', item.file.name, buffer);
-              }
-              reader.readAsArrayBuffer(item._file);
+            let reader = new FileReader();
+            reader.onload = function (event) {
+              let buffer = new Uint8Array(reader.result);
+              let name = scope.generateImageName() + '.' + item.file.name.split('.').pop();              
+              Meteor.call('product.upload', name, buffer);
+              scope.pictures.push(name);
             }
+            reader.readAsArrayBuffer(item._file);
           }
         })
       }
     });
   };
 
-  // Estimate express fee.
-  evalExpressFee(category, weight, quantity) {
-    if (quantity === 1) // DONG: flat for now.
-      return 18.99;
-    else if (quantity == 2)
-      return 16.99;
-    else if (quantity === 3)
-      return 14.99;
-    else if (quantity >= 4)
-      return 12.99;
+  generateImageName() {
+    let length = 10;
+    let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let name = "";
+    for (let i = 0, n = charset.length; i < length; ++i) {
+      name += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return name;
   };
 
-  // Estimate transortaion fee.
+  evalExpressFee() {
+    if (this.weight === 0.0) return;
+    let scale = this.weight / this.exprsWeightUnit;
+    let weight = round(scale) * this.exprsWeightUnit;
+    let fee = 0.0;
+    if (weight >= this.exprsWaiverMinPounds) {
+      fee = this.exprsRestPoundsFee * weight;
+    } else {
+      fee = this.exprsFirstPoundFee * 1.0 + this.exprsRestPoundsFee * (weight - 1.0);
+    }
+    if (fee < this.exprsMinFee) {
+      fee = this.exprsMinFee;
+    }
+    fee += this.exprsAdditionalFee;
+    return fee;
+  };
+
   evalTransportationFee() {
-    return 4.0 // DONG: flat for now.
+    let fee = this.transFlatRate; // DONG: flat for now.
+    fee += this.transAdditionalFee;
+    return fee;
   };
 
   // Estimate retail prices.
-  estimate() {
+  evalRetailPrices() {
     if (this.weight === 0) return;
     if (this.unitPrice === 0) return;
     this.retailPrices = [];
-    let transportationFee = this.evalTransportationFee();
+    let exprsFee = evalExpressFee();
+    let transFee = evalTransportationFee();
     for (let i = 0; i < 4; i++) {
       let quantity = i + 1;
-      let expressFee = this.evalExpressFee(this.category, this.weight, quantity);
-      let retailPrice = this.unitPrice * (parseFloat(this.taxRate) / 100.0 + 1.0) +
-        expressFee / quantity + transportationFee / quantity;
+      let retailPrice = this.unitPrice * (parseFloat(this.taxRate) / 100.0 + 1.0) + exprsFee / quantity + transFee / quantity;
       if (this.profitModel === "ratio")
-        retailPrice = retailPrice * (this.profitValue + 100.0) / 100.0;
+        retailPrice = retailPrice * (this.profitValue / 100.0 + 1.0);
       else if (this.profitModel === "flat")
         retailPrice = retailPrice + this.profitValue;
       this.retailPrices.push(retailPrice);
     }
   };
+
+  // Save to database.
 }
 
 // Declarations.

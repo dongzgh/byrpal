@@ -40,13 +40,20 @@ export default class ProductCtrl extends Controller {
       uploader() {
         return new this.FileUploader({
           autoUpload: true,
+          filters: [{
+            name: 'imageFilter',
+            fn: function (item /*{File|FileLikeObject}*/, options) {
+              var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+              return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            }
+          }],
           onSuccessItem: function (item, response, status, headers) {
+            let name = scope.generateImageName() + '.' + item.file.name.split('.').pop();
+            scope.pictures.push(name);
             let reader = new FileReader();
             reader.onload = function (event) {
               let buffer = new Uint8Array(reader.result);
-              let name = scope.generateImageName() + '.' + item.file.name.split('.').pop();              
               Meteor.call('product.upload', name, buffer);
-              scope.pictures.push(name);
             }
             reader.readAsArrayBuffer(item._file);
           }

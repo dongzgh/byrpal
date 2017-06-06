@@ -14,10 +14,10 @@
       </label>
       <label class="item item-input">
         <span class="input-label">Pictures</span>
-        <input type="file" nv-file-select uploader="productCtrl.uploader" multiple>
-      </label>
+        <input type="file" nv-file-select uploader="productCtrl.uploader" accept="image/*" multiple>        
+      </label>      
       <div class="list" ng-repeat="picture in productCtrl.pictures">
-        <img ng-src="./images/{{picture}}" height="150" width="150" />
+        <img ng-src="images/{{picture}}" height="150" width="150" />
       </div>
       <label class="item item-input">
         <span class="input-label">Description</span>

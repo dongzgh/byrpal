@@ -39,7 +39,7 @@ export default class ProductCtrl extends Controller {
     this.helpers({
       uploader() {
         return new this.FileUploader({
-          autoUpload: true,
+          autoUpload: false,
           filters: [{
             name: 'imageFilter',
             fn: function (item /*{File|FileLikeObject}*/, options) {
@@ -47,15 +47,15 @@ export default class ProductCtrl extends Controller {
               return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
           }],
-          onSuccessItem: function (item, response, status, headers) {
-            let name = scope.generateImageName() + '.' + item.file.name.split('.').pop();
-            scope.pictures.push(name);
-            let reader = new FileReader();
-            reader.onload = function (event) {
-              let buffer = new Uint8Array(reader.result);
-              Meteor.call('product.upload', name, buffer);
-            }
-            reader.readAsArrayBuffer(item._file);
+          onAfterAddingAll: function (items) {            
+            items.forEach(function (item) {
+              let reader = new FileReader();          
+              reader.onload = function(event){
+                scope.pictures.push(reader.result);
+              }
+              reader.readAsDataURL(item._file);
+              item.upload();
+            });
           }
         })
       }

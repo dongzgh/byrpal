@@ -6,13 +6,14 @@ import { Order } from '../lib/collections';
 // Startup.
 Meteor.startup(function () {
   return Meteor.methods({
-    "order.Empty": function () {
+    "empty.order": function () {
       return Order.remove({});
     },
 
-    'product.upload': function (name, buffer) {
+    'upload.image': function (name, buffer) {
+      console.log('upload.image is called!');
       var fs = Npm.require('fs');
-      let dir = '../web.browser/app/images';
+      let dir = 'assets/app/images';
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
       }

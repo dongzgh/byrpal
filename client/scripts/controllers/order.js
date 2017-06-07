@@ -83,7 +83,7 @@ export default class OrderCtrl extends Controller {
       status: "pending"
     };
     Orders.insert(item);
-    Meteor.call('order.Empty');
+    Meteor.call('empty.order');
     this.totalPrice = 0.0;
   };
 }

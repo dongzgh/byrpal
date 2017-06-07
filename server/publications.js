@@ -1,7 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 
 // Data.
-import { Products, Categories, Retailers, Orders, Order, Images } from '../lib/collections';
+import { Products, Categories, Retailers, Orders, Order } from '../lib/collections';
+
+// Globals.
+var fs = Npm.require('fs');
 
 if (Meteor.isServer) {
   Meteor.publish('products', function () {

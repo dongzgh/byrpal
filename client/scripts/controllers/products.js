@@ -34,6 +34,7 @@ export default class ProductsCtrl extends Controller {
     if (item === undefined) {
       Order.insert({
         id: product._id,
+        picture: product.pictures[0],
         quantity: 1
       })
     } else {

@@ -1,10 +1,10 @@
 // System.
-import { Controller } from 'angular-ecmascript/module-helpers';
-import { Meteor } from 'meteor/meteor';
-import Moment from 'moment';
+import { Controller } from "angular-ecmascript/module-helpers";
+import { Meteor } from "meteor/meteor";
+import Moment from "moment";
 
 // Data.
-import { Products, Orders, Order } from '../../../lib/collections';
+import { Products, Orders, Order } from "../../../lib/collections";
 
 // Controller definition.
 export default class OrderCtrl extends Controller {
@@ -14,12 +14,12 @@ export default class OrderCtrl extends Controller {
     let scope = this;
 
     // Subscriptions.    
-    this.subscribe('products');
-    this.subscribe('orders');
-    this.subscribe('order');
+    this.subscribe("products");
+    this.subscribe("orders");
+    this.subscribe("order");
 
     // Fields.
-    this.client = 'Min';
+    this.client = "Min";
     this.totalPrice = 0.0;
 
     // Helpers.
@@ -36,7 +36,7 @@ export default class OrderCtrl extends Controller {
     });
 
     // Listeners.
-    this.$rootScope.$on('order.updateTotalPrice', function(){
+    this.$rootScope.$on("order.updateTotalPrice", function(){
       let items = Order.find({}).fetch();
       let quantity = items.length;
       scope.totalPrice = 0.0;
@@ -77,17 +77,17 @@ export default class OrderCtrl extends Controller {
     });
     let item = {
       client: this.client,
-      time: Moment().format('MMMM Do YYYY, h:mm:ss a'),
+      time: Moment().format("MMMM Do YYYY, h:mm:ss a"),
       items: items,
       totalPrice: this.totalPrice,
       status: "pending"
     };
     Orders.insert(item);
-    Meteor.call('empty.order');
+    Meteor.call("empty.order");
     this.totalPrice = 0.0;
   };
 }
 
 // Declaration.
-OrderCtrl.$name = 'OrderCtrl';
-OrderCtrl.$inject = ['$rootScope'];
+OrderCtrl.$name = "OrderCtrl";
+OrderCtrl.$inject = ["$rootScope"];

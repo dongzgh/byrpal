@@ -1,9 +1,9 @@
 // System.
-import Moment from 'moment';
-import { Controller } from 'angular-ecmascript/module-helpers';
+import Moment from "moment";
+import { Controller } from "angular-ecmascript/module-helpers";
 
 // Data.
-import { Products, Orders } from '../../../lib/collections';
+import { Products, Orders } from "../../../lib/collections";
 
 // Controller definition.
 export default class OrdersCtrl extends Controller {
@@ -12,8 +12,8 @@ export default class OrdersCtrl extends Controller {
     super(...arguments);
     
     // Subscriptions.
-    this.subscribe('products');
-    this.subscribe('orders');
+    this.subscribe("products");
+    this.subscribe("orders");
 
     // Helpers.
     this.helpers({
@@ -38,4 +38,4 @@ export default class OrdersCtrl extends Controller {
 }
 
 // Declarations.
-OrdersCtrl.$name = 'OrdersCtrl';
+OrdersCtrl.$name = "OrdersCtrl";

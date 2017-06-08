@@ -1,29 +1,29 @@
 // System.
-import Angular from 'angular';
-import Loader from 'angular-ecmascript/module-loader';
-import 'angular-animate';
-import 'angular-meteor';
-import 'angular-sanitize';
-import 'angular-ui-router';
-import { Meteor } from 'meteor/meteor';
-import 'ionic-scripts';
-import 'angular-file-upload';
+import Angular from "angular";
+import Loader from "angular-ecmascript/module-loader";
+import "angular-animate";
+import "angular-meteor";
+import "angular-sanitize";
+import "angular-ui-router";
+import { Meteor } from "meteor/meteor";
+import "ionic-scripts";
+import "angular-file-upload";
 
 // Modules
-import ProductsCtrl from './controllers/products';
-import ProductCtrl from './controllers/product';
-import OrdersCtrl from './controllers/orders';
-import OrderCtrl from './controllers/order';
-import SettingsCtrl from './controllers/settings';
-import CalendarFilter from './filters/calendar';
-import RoutesConfig from './routes';
+import ProductsCtrl from "./controllers/products";
+import ProductCtrl from "./controllers/product";
+import OrdersCtrl from "./controllers/orders";
+import OrderCtrl from "./controllers/order";
+import SettingsCtrl from "./controllers/settings";
+import CalendarFilter from "./filters/calendar";
+import RoutesConfig from "./routes";
 
 // App
-const App = 'ShopAgent';
+const App = "ShopAgent";
 Angular.module(App, [
-  'angular-meteor',
-  'angularFileUpload',
-  'ionic'
+  "angular-meteor",
+  "angularFileUpload",
+  "ionic"
 ]);
 
 new Loader(App)
@@ -37,7 +37,7 @@ new Loader(App)
 
 // Startup
 if (Meteor.isCordova) {
-  Angular.element(document).on('deviceready', onReady);
+  Angular.element(document).on("deviceready", onReady);
 }
 else {
   Angular.element(document).ready(onReady);

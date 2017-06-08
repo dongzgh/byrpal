@@ -1,29 +1,29 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from "meteor/meteor";
 
 // Data.
-import { Products, Categories, Retailers, Orders, Order } from '../lib/collections';
+import { Products, Categories, Retailers, Orders, Order } from "../lib/collections";
 
 // Globals.
-var fs = Npm.require('fs');
+var fs = Npm.require("fs");
 
 if (Meteor.isServer) {
-  Meteor.publish('products', function () {
+  Meteor.publish("products", function () {
     return Products.find({});
   });
 
-  Meteor.publish('categories', function () {
+  Meteor.publish("categories", function () {
     return Categories.find({});
   });
 
-  Meteor.publish('retailers', function () {
+  Meteor.publish("retailers", function () {
     return Retailers.find({});
   });
 
-  Meteor.publish('orders', function () {
+  Meteor.publish("orders", function () {
     return Orders.find({});
   });
 
-  Meteor.publish('order', function () {
+  Meteor.publish("order", function () {
     return Order.find({});
   });
 }

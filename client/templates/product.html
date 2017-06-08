@@ -16,7 +16,7 @@
         <span class="input-label">Pictures</span>
         <input type="file" nv-file-select uploader="productCtrl.uploader" accept="image/*" multiple>        
       </label>
-      <ion-scroll zooming="true" direction="xy">
+      <ion-scroll zooming="true" direction="x">
         <div class="row responsive-sm">
           <div class="col" ng-repeat="picture in productCtrl.pictures">
             <img ng-src="{{picture}}" />

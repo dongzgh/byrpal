@@ -143,26 +143,28 @@ export default class ProductCtrl extends Controller {
     if (this.pictures.length === 0) return;
     if (this.description === "") return;
     if (this.retailPrices.length === 0) return;
-    Products.upsert({
-      name: this.name,
-      tags: this.tags,
-      pictures: this.pictures,
-      description: this.description,
-      weight: this.weight,
-      unitPrice: this.unitPrice,
-      retailer: this.retailer,
-      taxRate: this.taxRate,
-      profit: this.profit,
-      exprsFirstPound: this.exprsFirstPoundFee,
-      exprsRestPound: this.exprsRestPoundFee,
-      exprsMinFee: this.exprsMinFee,
-      exprsWaiverMinPounds: this.exprsWaiverMinPounds,
-      exprsWeightUnit: this.exprsWeightUnit,
-      exprsAdditionalFee: this.exprsAdditionalFee,
-      transFlatRate: this.transFlatRate,
-      transAdditionalFee: this.transAdditionalFee,
-      retailPrices: this.retailPrices
-    });
+    if (Products.findOne({ name: this.name }) === undefined) {
+      Products.insert({
+        name: this.name,
+        tags: this.tags,
+        pictures: this.pictures,
+        description: this.description,
+        weight: this.weight,
+        unitPrice: this.unitPrice,
+        retailer: this.retailer,
+        taxRate: this.taxRate,
+        profit: this.profit,
+        exprsFirstPound: this.exprsFirstPoundFee,
+        exprsRestPound: this.exprsRestPoundFee,
+        exprsMinFee: this.exprsMinFee,
+        exprsWaiverMinPounds: this.exprsWaiverMinPounds,
+        exprsWeightUnit: this.exprsWeightUnit,
+        exprsAdditionalFee: this.exprsAdditionalFee,
+        transFlatRate: this.transFlatRate,
+        transAdditionalFee: this.transAdditionalFee,
+        retailPrices: this.retailPrices
+      });
+    }
   };
 }
 

@@ -22,6 +22,7 @@ import RoutesConfig from "./routes";
 const App = "ShopAgent";
 Angular.module(App, [
   "angular-meteor",
+  "ui.router",
   "angularFileUpload",
   "ionic"
 ]);

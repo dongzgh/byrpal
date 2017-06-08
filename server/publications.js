@@ -1,22 +1,12 @@
 import { Meteor } from "meteor/meteor";
 
 // Data.
-import { Products, Categories, Retailers, Orders, Order } from "../lib/collections";
+import { Products, Orders, Order } from "../lib/collections";
 
-// Globals.
-var fs = Npm.require("fs");
-
+// Publications.
 if (Meteor.isServer) {
   Meteor.publish("products", function () {
     return Products.find({});
-  });
-
-  Meteor.publish("categories", function () {
-    return Categories.find({});
-  });
-
-  Meteor.publish("retailers", function () {
-    return Retailers.find({});
   });
 
   Meteor.publish("orders", function () {

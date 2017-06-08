@@ -27,14 +27,22 @@
         <span class="input-label">Description</span>
         <textarea rows="4" ng-model="productCtrl.description">
       </label>
-      <label class="item item-input">
+      <label class="item item-input item-select">
         <span class="input-label">Weight</span>
-        <input type="number" ng-model="productCtrl.weight">
-        <span>kg</span>
+        <input type="number" ng-model="productCtrl.weight.value">     
+        <select ng-model="productCtrl.weight.unit">
+          <option>kilogram</option>
+          <option>gram</option>
+          <option>poundmass</option>
+        </select>
       </label>
       <label class="item item-input">
         <span class="input-label">Unit Price</span>
         <input type="number" ng-model="productCtrl.unitPrice">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Retailer</span>
+        <input type="text" ng-model="productCtrl.retailer">
       </label>
       <label class="item item-input item-select">
         <span class="input-label">Tax Rate</span>
@@ -47,10 +55,10 @@
       </label>
       <label class="item item-input item-select">
         <span class="input-label">Profit</span>
-        <input type="number" ng-model="productCtrl.profitValue">     
-        <select ng-model="productCtrl.profitModel">
-          <option>By Ratio</option>
-          <option>Flat Rate</option>
+        <input type="number" ng-model="productCtrl.profit.value">     
+        <select ng-model="productCtrl.profit.model">
+          <option>Ratio</option>
+          <option>Flat</option>
         </select>
       </label>
       <div class="item item-divider">
@@ -73,7 +81,7 @@
         <input type="number" ng-model="productCtrl.exprsWaiverMinPounds">
       </label>
       <label class="item item-input">
-        <span class="input-label">Weight Unit</span>
+        <span class="input-label">Weight Unit (lbs)</span>
         <input type="number" ng-model="productCtrl.exprsWeightUnit">
       </label>
       <label class="item item-input">
@@ -100,7 +108,7 @@
         </select>
       </label>
       <div class="button-bar">
-        <a class="button button-icon icon ion-archive"></a>
+        <a class="button button-icon icon ion-archive" ng-click="productCtrl.save()"></a>
       </div>
     </div>
   </ion-content>

@@ -23,7 +23,12 @@ export default class ProductsCtrl extends Controller {
     });
   };
 
-  // Order products.
+  // Ask product.
+  edit(product) {
+    this.$state.go("tab.product", {reference: product});   
+  };
+
+  // Order product.
   order(product) {
     let item = Order.findOne({ id: product._id });
     if (item === undefined) {
@@ -43,4 +48,4 @@ export default class ProductsCtrl extends Controller {
 
 // Declarations.
 ProductsCtrl.$name = "ProductsCtrl";
-ProductsCtrl.$inject = ["$rootScope"];
+ProductsCtrl.$inject = ["$rootScope", "$state"];

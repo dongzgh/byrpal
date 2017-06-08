@@ -2,17 +2,11 @@
 import { Controller } from "angular-ecmascript/module-helpers";
 import Moment from "moment";
 
-// Data.
-import { Categories } from "../../../lib/collections";
-
 // Controller definitions.
 export default class SettingsCtrl extends Controller {
   // Construction.
   constructor() {
     super(...arguments);
-
-    // Subscriptions.
-    this.subscribe("categories");
 
     // Fields.    
     this.transportationFee = 0;
@@ -25,9 +19,6 @@ export default class SettingsCtrl extends Controller {
 
     // Helpers.
     this.helpers({
-       categories() {
-        return Categories.find({});
-      }
     });
   };
 }

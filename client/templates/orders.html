@@ -10,6 +10,7 @@
           <img ng-src="images/person.jpg"></img>
           <h2>{{order.client}}</h2>
           <p>{{order.time}}</p>
+          <p>{{order.totalPrice}}</p>
           <div class="list" ng-repeat="item in order.items">
             <div class="item item-thumbnail-left">
               <img ng-src="{{item.picture}}" />

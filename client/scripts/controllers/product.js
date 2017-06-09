@@ -22,7 +22,7 @@ export default class ProductCtrl extends Controller {
     this.tags = "";
     this.pictures = [];
     this.description = "";
-    this.weight = { unit: "kg", value: 0.0 };
+    this.weight = { unit: "gram", value: 0.0 };
     this.unitPrice = 0.0;
     this.taxRate = "13%";
     this.retailer = "";
@@ -37,7 +37,7 @@ export default class ProductCtrl extends Controller {
     this.transAdditionalFee = 0.0;
     this.retailPrices = [];
     if (this.$stateParams.reference !== null)
-      this.loadStateParams(this.$stateParams.reference);
+      this.setData(this.$stateParams.reference);
 
     // Helpers.
     this.helpers({
@@ -67,12 +67,17 @@ export default class ProductCtrl extends Controller {
   };
 
   // Load parameters.
-  loadStateParams(product) {
+  setData(product) {
     for (let property in product) {
       if (property.startsWith("$")) { continue; }
       if (property.startsWith("_")) { continue; };
       this[property] = product[property];
     }
+  };
+
+  // Clear pictures.
+  clearPictures(){
+    this.pictures = [];
   };
 
   // Get random image name.

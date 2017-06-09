@@ -25,7 +25,7 @@ export default class ProductsCtrl extends Controller {
 
   // Ask product.
   edit(product) {
-    this.$state.go("tab.product", {reference: product});   
+    this.$state.go("tab.product", { reference: product });
   };
 
   // Order product.

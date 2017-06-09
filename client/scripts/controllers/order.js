@@ -31,30 +31,40 @@ export default class OrderCtrl extends Controller {
           item.picture = product.pictures[0];
           item.name = product.name;
         });
+        this.totalPrice = this.evalTotalPrice();
         return items;
       }
     });
 
     // Listeners.
     this.$rootScope.$on("order.updateTotalPrice", function(){
-      let items = Order.find({}).fetch();
-      let quantity = items.length;
-      scope.totalPrice = 0.0;
-      items.forEach(function (item) {
-        let product = Products.findOne({ _id: item.id });
-        let unitPrice = 0;
-        if (quantity === 1) {
-          unitPrice = product.estimatedPrices[0];
-        } else if (quantity === 2) {
-          unitPrice = product.estimatedPrices[1];
-        } else if (quantity === 3) {
-          unitPrice = product.estimatedPrices[2];
-        } else if (quantity >= 4) {
-          unitPrice = product.estimatedPrices[3];
-        }
-        scope.totalPrice += unitPrice * item.quantity;
-      });
+      scope.totalPrice = scope.evalTotalPrice();
     });
+  };
+
+  // Evaluate toltal price.
+  evalTotalPrice() {
+    let items = Order.find({}).fetch();
+    let quantity = 0;
+    items.forEach(function(item){
+      quantity += item.quantity;
+    });
+    let totalPrice = 0.0;
+    items.forEach(function (item) {
+      let product = Products.findOne({ _id: item.id });
+      let unitPrice = 0;
+      if (quantity === 1) {
+        unitPrice = product.retailPrices[0];
+      } else if (quantity === 2) {
+        unitPrice = product.retailPrices[1];
+      } else if (quantity === 3) {
+        unitPrice = product.retailPrices[2];
+      } else if (quantity >= 4) {
+        unitPrice = product.retailPrices[3];
+      }
+      totalPrice += unitPrice * item.quantity;
+    });
+    return totalPrice.toFixed(2);
   };
 
   // Remove item.

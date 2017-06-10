@@ -13,9 +13,9 @@
         <input type="text" ng-model="productCtrl.tags">
       </label>
       <label class="item item-input">        
-        <span class="input-label">Pictures</span>
         <input id="upload" type="file" nv-file-select uploader="productCtrl.uploader" accept="image/*" multiple>
-        <button class="icon ion-trash-a" ng-click="productCtrl.clearPictures(product)"></button>     
+        <span for="upload" class="button button-outline button-positive">Pictures</span>    
+        <button class="button icon ion-trash-a" ng-click="productCtrl.clearPictures(product)"></button>
       </label>
       <div class="row" style="overflow: scroll">
         <div ng-repeat="picture in productCtrl.pictures">
@@ -107,7 +107,7 @@
         </select>
       </label>
       <div class="button-bar">
-        <a class="button button-icon icon ion-archive" ng-click="productCtrl.save()"></a>
+        <button class="button icon ion-archive" ng-click="productCtrl.save()"></button>
       </div>
     </div>
   </ion-content>

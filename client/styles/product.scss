@@ -1,7 +1,11 @@
 [name="tab-product"] {
+  [for="upload"] {
+    margin-right: 50px;
+  }
   #upload {
     opacity: 0;
     position: absolute;
+    width: 100%;
     z-index: -1;
   }
 }

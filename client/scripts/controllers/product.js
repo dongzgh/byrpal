@@ -1,10 +1,15 @@
 // System.
-import { Controller } from "angular-ecmascript/module-helpers";
+import {
+  Controller
+} from "angular-ecmascript/module-helpers";
 import Moment from "moment";
 import Units from "mathjs";
 
 // Data.
-import { Products, Retailers } from "../../../lib/collections";
+import {
+  Products,
+  Retailers
+} from "../../../lib/collections";
 
 // Controller definition.
 export default class ProductCtrl extends Controller {
@@ -22,11 +27,17 @@ export default class ProductCtrl extends Controller {
     this.tags = "";
     this.pictures = [];
     this.description = "";
-    this.weight = { unit: "gram", value: 0.0 };
+    this.weight = {
+      unit: "gram",
+      value: 0.0
+    };
     this.unitPrice = 0.0;
     this.taxRate = "13%";
     this.retailer = "";
-    this.profit = { model: 'ratio', value: 10.0 };
+    this.profit = {
+      model: 'ratio',
+      value: 10.0
+    };
     this.exprsFirstPoundFee = 8.0;
     this.exprsRestPoundsFee = 5.0;
     this.exprsMinFee = 13.0;
@@ -46,7 +57,7 @@ export default class ProductCtrl extends Controller {
           autoUpload: false,
           filters: [{
             name: "imageFilter",
-            fn: function (item /*{File|FileLikeObject}*/, options) {
+            fn: function (item /*{File|FileLikeObject}*/ , options) {
               var type = "|" + item.type.slice(item.type.lastIndexOf("/") + 1) + "|";
               return "|jpg|png|jpeg|bmp|gif|".indexOf(type) !== -1;
             }
@@ -64,19 +75,28 @@ export default class ProductCtrl extends Controller {
         })
       }
     });
+
+    // Listeners.
+    this.$rootScope.$on('product.update', function (event, product) {
+      scope.setData(product);
+    });
   };
 
   // Load parameters.
   setData(product) {
     for (let property in product) {
-      if (property.startsWith("$")) { continue; }
-      if (property.startsWith("_")) { continue; };
+      if (property.startsWith("$")) {
+        continue;
+      }
+      if (property.startsWith("_")) {
+        continue;
+      };
       this[property] = product[property];
     }
   };
 
   // Clear pictures.
-  clearPictures(){
+  clearPictures() {
     this.pictures = [];
   };
 
@@ -148,7 +168,9 @@ export default class ProductCtrl extends Controller {
     if (this.pictures.length === 0) return;
     if (this.description === "") return;
     if (this.retailPrices.length === 0) return;
-    if (Products.findOne({ name: this.name }) === undefined) {
+    if (Products.findOne({
+        name: this.name
+      }) === undefined) {
       Products.insert({
         name: this.name,
         tags: this.tags,

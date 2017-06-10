@@ -25,7 +25,8 @@ export default class ProductsCtrl extends Controller {
 
   // Ask product.
   edit(product) {
-    this.$state.go("tab.product", { reference: product });
+    this.$state.transitionTo("tab.product", { reference: product });
+    this.$rootScope.$broadcast('product.update', product);
   };
 
   // Order product.

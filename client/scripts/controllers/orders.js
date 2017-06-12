@@ -1,4 +1,5 @@
 // System.
+import Angular from 'angular';
 import Moment from "moment";
 import { Controller } from "angular-ecmascript/module-helpers";
 
@@ -37,6 +38,18 @@ export default class OrdersCtrl extends Controller {
         ]
       }
     });
+  };
+
+  // Update status.
+  updateStatus(order, item, state) {
+    item.status = state;
+    Orders.update({
+      _id: order._id
+    }, {
+      $set: {
+        items: order.items
+      }
+    })
   };
 
   // Remove order.

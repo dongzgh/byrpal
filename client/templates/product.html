@@ -12,9 +12,10 @@
         <span class="input-label">Tags</span>
         <input type="text" ng-model="productCtrl.tags">
       </label>
-      <label class="item item-input">        
+      <label class="item item-input">
+        <span class="input-label">Pictures</span>   
         <input id="upload" type="file" nv-file-select uploader="productCtrl.uploader" accept="image/*" multiple>
-        <span for="upload" class="button button-outline button-positive">Pictures</span>    
+        <span class="button icon ion-android-upload"></span>
         <button class="button icon ion-trash-a" ng-click="productCtrl.clearPictures(product)"></button>
       </label>
       <div class="row" style="overflow: scroll">
@@ -98,13 +99,12 @@
         <span class="input-label">Additional Fee</span>
         <input type="number" ng-model="productCtrl.transAdditionalFee">
       </label>
-      <label class="item item-input item-select">
-        <button class="button button-outline button-positive" ng-click="productCtrl.evalRetailPrices()">
-          Estimate Retail Prices
-        </button>
-        <select>
-          <option ng-repeat="retailPrice in productCtrl.retailPrices">{{$index + 1}} : {{retailPrice | number : 2}}</option>
-        </select>
+      <label class="item item-input">
+        <span class="input-label">Retail Prices</span>
+        <button class="button icon ion-calculator" ng-click="productCtrl.evalRetailPrices()"></button>
+        <span class="price" ng-repeat="retailPrice in productCtrl.retailPrices">
+          QTY ({{$index + 1}}) : {{retailPrice | number : 2}}
+        </span>
       </label>
       <div class="button-bar">
         <button class="button icon ion-archive" ng-click="productCtrl.save()"></button>

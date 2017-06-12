@@ -1,0 +1,72 @@
+.price {
+  margin-right: 20px;
+  padding: 5px;
+  background-color: green;
+  color: white;
+}
+
+.button {
+  background-color: #0096ff;
+  color: white;
+  border-radius: 0;
+  margin-right: 20px;
+  padding: 5px;
+  height: 50px;
+  width: 50px;
+}
+
+.button:hover {
+  background-color: #ff9600;
+}
+
+.button.active {
+  background-color: #87ff28;
+  border: none;
+}
+
+.button-bar {
+  .button {
+    background-color: #222;
+    border: none;
+    border-radius: 0 !important;
+    margin-right: 0;
+    padding: 0;
+  }
+  .button:hover {
+    color: #ff9600;
+  }
+}
+
+.item-input {
+  padding: 0px 0px 0px 16px;
+  border: none;
+  margin-top: 2px;
+  background-color: #666;
+  span:first-child {
+    color: white;
+  }
+  input {
+    color: white;
+    background-color: #888 !important;
+    padding-left: 10px;
+  }
+  i {
+    margin-right: 20px;
+  }
+}
+label {
+  input {
+    background-color: white;
+  }
+}
+
+label span:first-child {
+  margin-right: 50px;
+}
+
+.item-select select{
+  text-transform: uppercase;
+  width: 200px;
+  background-color: #222;
+  color: white;
+}

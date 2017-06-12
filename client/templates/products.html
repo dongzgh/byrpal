@@ -23,7 +23,10 @@
           {{product.description}}
         </div>
         <div class="item item-divider">
-          (1:){{product.retailPrices[0]}}, (2:){{product.retailPrices[1]}}, (3:){{product.retailPrices[2]}}, (>=4:){{product.retailPrices[3]}}
+          <span class="price" ng-repeat="retailPrice in product.retailPrices">
+            <i class="icon ion-pricetag"></i>
+            QTY({{$index + 1}}) : {{retailPrice}}
+          </span>
         </div>
         <div class="item item-divider">
           <button class="button icon ion-plus" ng-click="productsCtrl.order(product)"></button>

@@ -1,9 +1,9 @@
-[name="tab-orders"] {
-  .item-avatar {
-    background-color: rgba(17, 243, 157, 0.66);
+  [name="tab-orders"] {
+    .item-avatar {
+      background-color: rgba(17, 243, 157, 0.66);
+    }
     img {
-      width: auto;
-      height: auto;
+      width: auto !important;
+      height: auto !important;
     }
   }
-}

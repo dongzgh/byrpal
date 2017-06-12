@@ -7,9 +7,12 @@
     <div class="list" ng-repeat="product in productsCtrl.products">
       <div class="card">
         <div class="item item-divider">
-          <a href="" class="item" ng-click="productsCtrl.edit(product)">
-            {{product.name}}
-          </a>
+          <div class="item item-avatar">
+            <img ng-src="images/product.jpg"></img>
+            <a href="" class="item" ng-click="productsCtrl.edit(product)">
+              {{product.name}}
+            </a>
+          </div>
         </div>
         <div class="row" style="overflow: scroll">
           <div ng-repeat="picture in product.pictures">

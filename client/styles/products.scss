@@ -5,10 +5,15 @@
   .card {
     border-radius: 0;
     .item-divider:first-child {
-      background-color: #87ff28;
+      background-color: rgba(0, 0, 0, 0.79);
       padding: 5px;
-      a {
+      .item-avatar {
         background-color: transparent;
+        a {
+          background-color: transparent;
+          color: white;
+          border: none;
+        }
       }
     }
   }

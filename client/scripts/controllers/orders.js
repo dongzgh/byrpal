@@ -27,6 +27,14 @@ export default class OrdersCtrl extends Controller {
           })
         })
         return orders;
+      },
+      states() {
+        return [
+          {'name': 'pending', 'icon': 'ion-more'},
+          {'name': 'shopping', 'icon': 'ion-bag'},
+          {'name': 'sending', 'icon': 'ion-paper-airplane'},
+          {'name': 'completed', 'icon': 'ion-checkmark'}
+        ]
       }
     });
   };

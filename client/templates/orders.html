@@ -20,10 +20,9 @@
               <img ng-src="{{item.picture}}" />
               <h3>{{item.name}}</h3>
               <p>QTY: {{item.quantity}}</p>
-              <button class="button icon ion-more"></button>
-              <button class="button icon ion-bag"></button>
-              <button class="button icon ion-paper-airplane"></button>
-              <button class="button icon ion-checkmark"></button>
+              <button class="button" ng-repeat="state in ordersCtrl.states" ng-class="{active: item.status==state.name}">
+                <i class="icon {{state.icon}}"></i>
+              </button>
             </div>
           </div>
         </div>

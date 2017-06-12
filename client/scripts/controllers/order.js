@@ -1,10 +1,18 @@
 // System.
-import { Controller } from "angular-ecmascript/module-helpers";
-import { Meteor } from "meteor/meteor";
+import {
+  Controller
+} from "angular-ecmascript/module-helpers";
+import {
+  Meteor
+} from "meteor/meteor";
 import Moment from "moment";
 
 // Data.
-import { Products, Orders, Order } from "../../../lib/collections";
+import {
+  Products,
+  Orders,
+  Order
+} from "../../../lib/collections";
 
 // Controller definition.
 export default class OrderCtrl extends Controller {
@@ -27,7 +35,9 @@ export default class OrderCtrl extends Controller {
       items() {
         let items = Order.find({}).fetch();
         items.forEach(function (item) {
-          let product = Products.findOne({ _id: item.id });
+          let product = Products.findOne({
+            _id: item.id
+          });
           item.picture = product.pictures[0];
           item.name = product.name;
         });
@@ -37,7 +47,7 @@ export default class OrderCtrl extends Controller {
     });
 
     // Listeners.
-    this.$rootScope.$on("order.updateTotalPrice", function(){
+    this.$rootScope.$on("order.updateTotalPrice", function () {
       scope.totalPrice = scope.evalTotalPrice();
     });
   };
@@ -46,12 +56,14 @@ export default class OrderCtrl extends Controller {
   evalTotalPrice() {
     let items = Order.find({}).fetch();
     let quantity = 0;
-    items.forEach(function(item){
+    items.forEach(function (item) {
       quantity += item.quantity;
     });
     let totalPrice = 0.0;
     items.forEach(function (item) {
-      let product = Products.findOne({ _id: item.id });
+      let product = Products.findOne({
+        _id: item.id
+      });
       let unitPrice = 0;
       if (quantity === 1) {
         unitPrice = product.retailPrices[0];
@@ -70,21 +82,27 @@ export default class OrderCtrl extends Controller {
   // Remove item.
   remove(item) {
     if (item.quantity > 1) {
-      Order.update(
-        { _id: item._id },
-        { $inc: { quantity: -1 } }
-      );
+      Order.update({
+        _id: item._id
+      }, {
+        $inc: {
+          quantity: -1
+        }
+      });
     } else {
-      Order.remove({ _id: item._id });
+      Order.remove({
+        _id: item._id
+      });
     }
   };
 
   // Save order.
   save() {
-    if(this.totalPrice === 0) return;
+    if (this.totalPrice === 0) return;
     let items = Order.find({}).fetch();
     items.forEach(function (item) {
       delete item._id;
+      item.status = 'pending';
     });
     let item = {
       client: this.client,

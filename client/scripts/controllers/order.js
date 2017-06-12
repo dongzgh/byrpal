@@ -81,6 +81,7 @@ export default class OrderCtrl extends Controller {
 
   // Save order.
   save() {
+    if(this.totalPrice === 0) return;
     let items = Order.find({}).fetch();
     items.forEach(function (item) {
       delete item._id;

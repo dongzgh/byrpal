@@ -1,9 +1,11 @@
 [name="tab-order"] {
-  .item-thumbnail-left {
-    background-color: rgba(17, 243, 157, 0.66);
-    img {
-      width: auto !important;
-      height: auto !important;
+  .card {
+    border-radius: 0;
+    .item-thumbnail-left {
+      img {
+        width: auto !important;
+        height: auto !important;
+      }
     }
   }
 }

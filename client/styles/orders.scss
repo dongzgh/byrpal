@@ -1,18 +1,24 @@
   [name="tab-orders"] {
-    .item-avatar {
-      background-color: rgba(0, 0, 0, 0.79);
-      h2, p {
-        color: white;
-      }
-    }
-    img {
-      width: auto !important;
-      height: auto !important;
-    }
-    .button.active {
-      background-color: #87ff28;
+    .card {
       border-radius: 0;
-      color: white;
-      border: none;
+      .item-divider:first-child {
+        background-color: rgba(0, 0, 0, 0.79);
+        .item-avatar {
+          background-color: transparent;
+        }
+        h2, p {
+          color: white;
+        }
+      }
+      img {
+        width: auto !important;
+        height: auto !important;
+      }
+      .button.active {
+        background-color: #87ff28;
+        border-radius: 0;
+        color: white;
+        border: none;
+      }
     }
   }

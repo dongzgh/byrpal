@@ -1,9 +1,14 @@
 // System.
-import { Controller } from "angular-ecmascript/module-helpers";
+import {
+  Controller
+} from "angular-ecmascript/module-helpers";
 import Moment from "moment";
 
 // Data.
-import { Products, Order } from "../../../lib/collections";
+import {
+  Products,
+  Order
+} from "../../../lib/collections";
 
 // Controller definition.
 export default class ProductsCtrl extends Controller {
@@ -25,24 +30,30 @@ export default class ProductsCtrl extends Controller {
 
   // Ask product.
   edit(product) {
-    this.$state.transitionTo("tab.product", { reference: product });
+    this.$state.transitionTo("tab.product", {
+      reference: product
+    });
     this.$rootScope.$broadcast('product.update', product);
   };
 
   // Order product.
   order(product) {
-    let item = Order.findOne({ id: product._id });
+    let item = Order.findOne({
+      id: product._id
+    });
     if (item === undefined) {
       Order.insert({
         id: product._id,
-        picture: product.pictures[0],
         quantity: 1
       })
     } else {
-      Order.update(
-        { _id: item._id },
-        { $inc: { quantity: 1 } }
-      )
+      Order.update({
+        _id: item._id
+      }, {
+        $inc: {
+          quantity: 1
+        }
+      })
     }
     this.$rootScope.$broadcast("order.updateTotalPrice");
   };

@@ -5,7 +5,9 @@ import "angular-animate";
 import "angular-meteor";
 import "angular-sanitize";
 import "angular-ui-router";
-import { Meteor } from "meteor/meteor";
+import {
+  Meteor
+} from "meteor/meteor";
 import "ionic-scripts";
 import "angular-file-upload";
 
@@ -14,6 +16,7 @@ import ProductsCtrl from "./controllers/products";
 import ProductCtrl from "./controllers/product";
 import OrdersCtrl from "./controllers/orders";
 import OrderCtrl from "./controllers/order";
+import ShoppingCtrl from "./controllers/shopping";
 import SettingsCtrl from "./controllers/settings";
 import CalendarFilter from "./filters/calendar";
 import RoutesConfig from "./routes";
@@ -32,6 +35,7 @@ new Loader(App)
   .load(ProductCtrl)
   .load(OrdersCtrl)
   .load(OrderCtrl)
+  .load(ShoppingCtrl)
   .load(SettingsCtrl)
   .load(CalendarFilter)
   .load(RoutesConfig);
@@ -39,8 +43,7 @@ new Loader(App)
 // Startup
 if (Meteor.isCordova) {
   Angular.element(document).on("deviceready", onReady);
-}
-else {
+} else {
   Angular.element(document).ready(onReady);
 }
 

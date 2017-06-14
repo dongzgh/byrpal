@@ -1,5 +1,7 @@
 // System.
-import { Controller } from "angular-ecmascript/module-helpers";
+import {
+  Controller
+} from "angular-ecmascript/module-helpers";
 import Moment from "moment";
 
 // Controller definitions.
@@ -18,8 +20,7 @@ export default class SettingsCtrl extends Controller {
     this.customTarif = 0.12;
 
     // Helpers.
-    this.helpers({
-    });
+    this.helpers({});
   };
 }
 

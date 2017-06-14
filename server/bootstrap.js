@@ -1,7 +1,11 @@
-import { Meteor } from "meteor/meteor";
+import {
+  Meteor
+} from "meteor/meteor";
 
 // Data.
-import { Order } from "../lib/collections";
+import {
+  Order
+} from "../lib/collections";
 
 // Startup.
 Meteor.startup(function () {
@@ -18,7 +22,9 @@ Meteor.startup(function () {
       }
       let path = dir + "/" + name;
       let file = Buffer.from(buffer);
-      fs.writeFileSync(path, file, {encoding: null});
+      fs.writeFileSync(path, file, {
+        encoding: null
+      });
     }
   });
 });

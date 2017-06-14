@@ -1,17 +1,23 @@
 // System.
 import Angular from 'angular';
 import Moment from "moment";
-import { Controller } from "angular-ecmascript/module-helpers";
+import {
+  Controller
+} from "angular-ecmascript/module-helpers";
 
 // Data.
-import { Products, Orders } from "../../../lib/collections";
+import {
+  Products,
+  Orders,
+  Shopping
+} from "../../../lib/collections";
 
 // Controller definition.
 export default class OrdersCtrl extends Controller {
   // Constructor.
   constructor() {
     super(...arguments);
-    
+
     // Subscriptions.
     this.subscribe("products");
     this.subscribe("orders");
@@ -22,7 +28,9 @@ export default class OrdersCtrl extends Controller {
         let orders = Orders.find({}).fetch();
         orders.forEach(function (order) {
           order.items.forEach(function (item) {
-            let product = Products.findOne({ _id: item.id });
+            let product = Products.findOne({
+              _id: item.id
+            });
             item.picture = product.pictures[0];
             item.name = product.name;
           })
@@ -30,11 +38,22 @@ export default class OrdersCtrl extends Controller {
         return orders;
       },
       states() {
-        return [
-          {'name': 'pending', 'icon': 'ion-more'},
-          {'name': 'shopping', 'icon': 'ion-bag'},
-          {'name': 'sending', 'icon': 'ion-paper-airplane'},
-          {'name': 'completed', 'icon': 'ion-checkmark'}
+        return [{
+            'name': 'pending',
+            'icon': 'ion-more'
+          },
+          {
+            'name': 'shopping',
+            'icon': 'ion-bag'
+          },
+          {
+            'name': 'sending',
+            'icon': 'ion-paper-airplane'
+          },
+          {
+            'name': 'completed',
+            'icon': 'ion-checkmark'
+          }
         ]
       }
     });
@@ -42,6 +61,35 @@ export default class OrdersCtrl extends Controller {
 
   // Update status.
   updateStatus(order, item, state) {
+    // - Update shopping collection.
+    if (item.status !== "shopping" && state === "shopping") {
+      let buy = Shopping.findOne({id: item.id});
+      if(buy === undefined) {
+        Shopping.insert({
+          id: item.id,
+          quantity: item.quantity
+        })
+      } else {
+        Shopping.update({
+          _id: buy._id
+        }, {
+          $inc: {
+            quantity: item.quantity
+          }
+        })
+      }
+    } else if(item.status === "shopping" && state !== "shopping") {
+      let buy = Shopping.findOne({id: item.id});
+      Shopping.update({
+        _id: buy._id
+      }, {
+        $inc: {
+          quantity: - item.quantity
+        }
+      })
+    }
+
+    // - Update item status.
     item.status = state;
     Orders.update({
       _id: order._id
@@ -54,7 +102,9 @@ export default class OrdersCtrl extends Controller {
 
   // Remove order.
   remove(order) {
-    Orders.remove({_id: order._id});
+    Orders.remove({
+      _id: order._id
+    });
   };
 }
 

@@ -1,11 +1,14 @@
 // System.
-import { Config } from "angular-ecmascript/module-helpers";
+import {
+  Config
+} from "angular-ecmascript/module-helpers";
 
 // Modules
 import ProductsCtrl from "./controllers/products";
 import ProductCtrl from "./controllers/product";
 import OrdersCtrl from "./controllers/orders";
 import OrderCtrl from "./controllers/order";
+import Shopping from "./controllers/shopping";
 import SettingsCtrl from "./controllers/settings";
 
 // Templates
@@ -14,6 +17,7 @@ import productsTemplateUrl from "../templates/products.html";
 import productTemplateUrl from "../templates/product.html";
 import ordersTemplateUrl from "../templates/orders.html";
 import orderTemplateUrl from "../templates/order.html";
+import shoppingTemplateUrl from "../templates/shopping.html";
 import settingsTemplateUrl from "../templates/settings.html";
 
 // Config definition.
@@ -61,6 +65,15 @@ export default class RoutesConfig extends Config {
           "tab-order": {
             templateUrl: orderTemplateUrl,
             controller: "OrderCtrl as orderCtrl"
+          }
+        }
+      })
+      .state("tab.shopping", {
+        url: "/shopping",
+        views: {
+          "tab-shopping": {
+            templateUrl: shoppingTemplateUrl,
+            controller: "ShoppingCtrl as shoppingCtrl"
           }
         }
       })

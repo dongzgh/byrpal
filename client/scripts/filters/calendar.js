@@ -1,5 +1,7 @@
 // System.
-import { Filter } from "angular-ecmascript/module-helpers";
+import {
+  Filter
+} from "angular-ecmascript/module-helpers";
 import Moment from "moment";
 
 // Filter definitions.

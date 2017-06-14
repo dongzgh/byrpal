@@ -1,7 +1,14 @@
-import { Meteor } from "meteor/meteor";
+import {
+  Meteor
+} from "meteor/meteor";
 
 // Data.
-import { Products, Orders, Order } from "../lib/collections";
+import {
+  Products,
+  Orders,
+  Order,
+  Shopping
+} from "../lib/collections";
 
 // Publications.
 if (Meteor.isServer) {
@@ -15,5 +22,9 @@ if (Meteor.isServer) {
 
   Meteor.publish("order", function () {
     return Order.find({});
+  });
+
+  Meteor.publish("shopping", function () {
+    return Shopping.find({});
   });
 }

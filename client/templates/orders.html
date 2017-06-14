@@ -11,15 +11,19 @@
             <img ng-src="images/person.jpg"></img>
             <h2>{{order.client}}</h2>
             <p>{{order.time}}</p>
-            <p>{{order.totalPrice}}</p>
+            <p>${{order.totalPrice}}</p>
+            <button class="button icon ion-edit" ng-click="ordersCtrl.edit(order)"></button>
+            <button class="button icon ion-trash-a" ng-click="ordersCtrl.remove(order)"></button>
           </div>
         </div>
-        <div class="item item-divider">
-          <div class="list" ng-repeat="item in order.items track by $index">
-            <div class="item item-thumbnail-left">
-              <img ng-src="{{item.picture}}" />
+        <div class="list" ng-repeat="item in order.items track by $index">
+          <div class="item item-thumbnail-left">
+            <img ng-src="{{item.picture}}" />
+            <div class="item item-divider">
               <h3>{{item.name}}</h3>
               <p>QTY: {{item.quantity}}</p>
+            </div>
+            <div class="item item-divider">
               <button class="button" ng-repeat="state in ordersCtrl.states" ng-class="{active: item.status==state.name}" ng-click="ordersCtrl.updateStatus(order, item, state.name)">
                 <i class="icon {{state.icon}}"></i>
               </button>

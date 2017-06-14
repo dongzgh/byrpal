@@ -28,7 +28,7 @@ export default class ProductsCtrl extends Controller {
     });
   };
 
-  // Ask product.
+  // Edit product.
   edit(product) {
     this.$state.transitionTo("tab.product", {
       reference: product

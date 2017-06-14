@@ -29,32 +29,44 @@ export default class OrderCtrl extends Controller {
     // Fields.
     this.client = "Min";
     this.totalPrice = 0.0;
+    if (this.$stateParams.reference !== null)
+      this.totalPrice = this.$stateParams.reference.totalPrice;
 
     // Helpers.
     this.helpers({
       items() {
-        let items = Order.find({}).fetch();
-        items.forEach(function (item) {
-          let product = Products.findOne({
-            _id: item.id
+        if (this.$stateParams.reference === null) {
+          let items = Order.find({}).fetch();
+          items.forEach(function (item) {
+            let product = Products.findOne({
+              _id: item.id
+            });
+            item.picture = product.pictures[0];
+            item.name = product.name;
           });
-          item.picture = product.pictures[0];
-          item.name = product.name;
-        });
-        this.totalPrice = this.evalTotalPrice();
-        return items;
+          this.totalPrice = this.evalTotalPrice(items);
+          return items;
+        } else {
+          let items = this.$stateParams.reference.items;
+          this.totalPrice = this.evalTotalPrice(items);
+          return items;
+        }
       }
     });
 
-    // Listeners.
+    // Listener: update total price.
     this.$rootScope.$on("order.updateTotalPrice", function () {
-      scope.totalPrice = scope.evalTotalPrice();
+      scope.totalPrice = scope.evalTotalPrice(scope.items);
+    });
+
+    // Listener: update order.
+    this.$rootScope.$on('order.update', function (event, order) {
+      scope.setData(order);
     });
   };
 
   // Evaluate toltal price.
-  evalTotalPrice() {
-    let items = Order.find({}).fetch();
+  evalTotalPrice(items) {
     let quantity = 0;
     items.forEach(function (item) {
       quantity += item.quantity;
@@ -77,6 +89,12 @@ export default class OrderCtrl extends Controller {
       totalPrice += unitPrice * item.quantity;
     });
     return totalPrice.toFixed(2);
+  };
+
+  // Load parameters.
+  setData(order) {
+    this.totalPrice = order.totalPrice;
+    this.items = order.items;
   };
 
   // Remove item.
@@ -119,4 +137,4 @@ export default class OrderCtrl extends Controller {
 
 // Declaration.
 OrderCtrl.$name = "OrderCtrl";
-OrderCtrl.$inject = ["$rootScope"];
+OrderCtrl.$inject = ["$rootScope", "$stateParams"];

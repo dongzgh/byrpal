@@ -219,6 +219,13 @@ export default class ProductCtrl extends Controller {
       });
     }
   };
+
+  // Remove product.
+  remove(product) {
+    Products.remove({
+      _id: product._id
+    });
+  };
 }
 
 // Declarations.

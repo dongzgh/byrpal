@@ -25,17 +25,23 @@ export default class ShoppingCtrl extends Controller {
 
     // Helpers.
     this.helpers({
-      items () {
+      items() {
         let items = Shopping.find({}).fetch();
-        items.forEach(function(item){
-          let product = Products.findOne({_id: item.id});
+        items.forEach(function (item) {
+          let product = Products.findOne({
+            _id: item.id
+          });
           item.name = product.name;
-          item.picture = product.pictures[0];          
+          item.picture = product.pictures[0];
+          item.retailer = product.retailer;
+          item.retailPrices = product.retailPrices;
         });
         return items;
       }
     });
   };
+
+  // Remove.
 }
 
 // Declarations.

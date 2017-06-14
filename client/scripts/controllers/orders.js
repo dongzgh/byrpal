@@ -63,8 +63,10 @@ export default class OrdersCtrl extends Controller {
   updateStatus(order, item, state) {
     // - Update shopping collection.
     if (item.status !== "shopping" && state === "shopping") {
-      let buy = Shopping.findOne({id: item.id});
-      if(buy === undefined) {
+      let buy = Shopping.findOne({
+        id: item.id
+      });
+      if (buy === undefined) {
         Shopping.insert({
           id: item.id,
           quantity: item.quantity
@@ -78,13 +80,15 @@ export default class OrdersCtrl extends Controller {
           }
         })
       }
-    } else if(item.status === "shopping" && state !== "shopping") {
-      let buy = Shopping.findOne({id: item.id});
+    } else if (item.status === "shopping" && state !== "shopping") {
+      let buy = Shopping.findOne({
+        id: item.id
+      });
       Shopping.update({
         _id: buy._id
       }, {
         $inc: {
-          quantity: - item.quantity
+          quantity: -item.quantity
         }
       })
     }
@@ -100,6 +104,13 @@ export default class OrdersCtrl extends Controller {
     })
   };
 
+  // Edit order.
+  edit(order) {
+    this.$state.transitionTo("tab.order", {
+      reference: order
+    });
+    this.$rootScope.$broadcast('order.update', order);
+  };
   // Remove order.
   remove(order) {
     Orders.remove({
@@ -110,3 +121,4 @@ export default class OrdersCtrl extends Controller {
 
 // Declarations.
 OrdersCtrl.$name = "OrdersCtrl";
+OrdersCtrl.$inject = ["$rootScope", "$state"];

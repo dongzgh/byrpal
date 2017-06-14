@@ -9,9 +9,9 @@
         <div class="item item-divider">
           <div class="item item-avatar">
             <img ng-src="images/product.jpg"></img>
-            <a href="" class="item" ng-click="productsCtrl.edit(product)">
-              {{product.name}}
-            </a>
+            <h2>{{product.name}}</h2>
+            <button class="button icon ion-edit" ng-click="productsCtrl.edit(product)"></button>
+            <button class="button icon ion-trash-a" ng-click="productsCtrl.remove(product)"></button>
           </div>
         </div>
         <div class="row" style="overflow: scroll">
@@ -25,7 +25,7 @@
         <div class="item item-divider">
           <span class="price" ng-repeat="retailPrice in product.retailPrices">
             <i class="icon ion-pricetag"></i>
-            QTY({{$index + 1}}) : {{retailPrice}}
+            QTY({{$index + 1}}) : ${{retailPrice}}
           </span>
         </div>
         <div class="item item-divider">

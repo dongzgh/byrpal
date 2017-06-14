@@ -66,6 +66,9 @@ export default class RoutesConfig extends Config {
             templateUrl: orderTemplateUrl,
             controller: "OrderCtrl as orderCtrl"
           }
+        },
+        params: {
+          reference: null
         }
       })
       .state("tab.shopping", {

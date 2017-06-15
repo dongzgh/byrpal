@@ -30,7 +30,7 @@ export default class ProductsCtrl extends Controller {
 
   // Edit product.
   edit(product) {
-    this.$state.transitionTo("tab.product", {
+    this.$state.go("tab.product", {
       reference: product
     });
   };
@@ -54,7 +54,6 @@ export default class ProductsCtrl extends Controller {
         }
       })
     }
-    this.$rootScope.$broadcast("order.updateTotalPrice");
   };
 }
 

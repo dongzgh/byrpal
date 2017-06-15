@@ -80,6 +80,7 @@ export default class ProductCtrl extends Controller {
     }      
 
     // Listeners.
+    // - Update product.
     this.$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
       if(toParams === fromParams) return;
       if(toParams.reference !== undefined && toParams.reference !== null) {
@@ -224,13 +225,6 @@ export default class ProductCtrl extends Controller {
         }
       });
     }
-  };
-
-  // Remove product.
-  remove(product) {
-    Products.remove({
-      _id: product._id
-    });
   };
 }
 

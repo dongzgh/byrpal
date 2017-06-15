@@ -47,21 +47,16 @@ export default class OrderCtrl extends Controller {
     });
 
     // Initialization.
-    if(this.$stateParams.reference !== null) {
+    if (this.$stateParams.reference !== null) {
       this.setData(this.$stateParams.reference);
     }
 
-    // Listener: update total price.
-    this.$rootScope.$on("order.updateTotalPrice", function () {
-      scope.totalPrice = scope.evalTotalPrice(scope.items);
-    });
-
-    // Listener: update order information.
+    // Listener
+    // - Update order.
     this.$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-      if(toParams === fromParams) return;
-      if(toParams.reference !== undefined && toParams.reference !== null) {
-        scope.setData(toParams.reference);
-      }
+      if(toState.name !== "tab.order") return;
+      if(this.$stateParams.reference === toParams.reference) return;
+      scope.setData(toParams.reference);
     });
   };
 
@@ -93,8 +88,13 @@ export default class OrderCtrl extends Controller {
 
   // Load parameters.
   setData(order) {
-    this.totalPrice = order.totalPrice;
-    this.items = order.items;
+    Meteor.call('empty.order');
+    order.items.forEach(function (item) {
+      Order.insert({
+        id: item.id,
+        quantity: item.quantity
+      });
+    });
   };
 
   // Remove item.

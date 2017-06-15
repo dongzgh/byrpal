@@ -29,39 +29,39 @@ export default class OrderCtrl extends Controller {
     // Fields.
     this.client = "Min";
     this.totalPrice = 0.0;
-    if (this.$stateParams.reference !== null)
-      this.totalPrice = this.$stateParams.reference.totalPrice;
 
     // Helpers.
     this.helpers({
       items() {
-        if (this.$stateParams.reference === null) {
-          let items = Order.find({}).fetch();
-          items.forEach(function (item) {
-            let product = Products.findOne({
-              _id: item.id
-            });
-            item.picture = product.pictures[0];
-            item.name = product.name;
+        let items = Order.find({}).fetch();
+        items.forEach(function (item) {
+          let product = Products.findOne({
+            _id: item.id
           });
-          this.totalPrice = this.evalTotalPrice(items);
-          return items;
-        } else {
-          let items = this.$stateParams.reference.items;
-          this.totalPrice = this.evalTotalPrice(items);
-          return items;
-        }
+          item.picture = product.pictures[0];
+          item.name = product.name;
+        });
+        this.totalPrice = this.evalTotalPrice(items);
+        return items;
       }
     });
+
+    // Initialization.
+    if(this.$stateParams.reference !== null) {
+      this.setData(this.$stateParams.reference);
+    }
 
     // Listener: update total price.
     this.$rootScope.$on("order.updateTotalPrice", function () {
       scope.totalPrice = scope.evalTotalPrice(scope.items);
     });
 
-    // Listener: update order.
-    this.$rootScope.$on('order.update', function (event, order) {
-      scope.setData(order);
+    // Listener: update order information.
+    this.$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+      if(toParams === fromParams) return;
+      if(toParams.reference !== undefined && toParams.reference !== null) {
+        scope.setData(toParams.reference);
+      }
     });
   };
 

@@ -47,8 +47,6 @@ export default class ProductCtrl extends Controller {
     this.transFlatRate = 4.0;
     this.transAdditionalFee = 0.0;
     this.retailPrices = [];
-    if (this.$stateParams.reference !== null)
-      this.setData(this.$stateParams.reference);
 
     // Helpers.
     this.helpers({
@@ -76,9 +74,17 @@ export default class ProductCtrl extends Controller {
       }
     });
 
+    // Initialization.
+    if (this.$stateParams.reference !== null) {
+      this.setData(this.$stateParams.reference);
+    }      
+
     // Listeners.
-    this.$rootScope.$on('product.update', function (event, product) {
-      scope.setData(product);
+    this.$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+      if(toParams === fromParams) return;
+      if(toParams.reference !== undefined && toParams.reference !== null) {
+        scope.setData(toParams.reference);
+      }
     });
   };
 

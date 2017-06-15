@@ -17,6 +17,7 @@ export default class OrdersCtrl extends Controller {
   // Constructor.
   constructor() {
     super(...arguments);
+    let scope = this;
 
     // Subscriptions.
     this.subscribe("products");
@@ -106,11 +107,11 @@ export default class OrdersCtrl extends Controller {
 
   // Edit order.
   edit(order) {
-    this.$state.transitionTo("tab.order", {
+    this.$state.go("tab.order", {
       reference: order
     });
-    this.$rootScope.$broadcast('order.update', order);
   };
+
   // Remove order.
   remove(order) {
     Orders.remove({

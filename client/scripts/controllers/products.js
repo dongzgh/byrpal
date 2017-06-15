@@ -33,7 +33,6 @@ export default class ProductsCtrl extends Controller {
     this.$state.transitionTo("tab.product", {
       reference: product
     });
-    this.$rootScope.$broadcast('product.update', product);
   };
 
   // Order product.

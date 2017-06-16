@@ -110,6 +110,7 @@ export default class OrdersCtrl extends Controller {
     this.$state.go("tab.order", {
       reference: order
     });
+    this.$rootScope.$broadcast("order.update", order);
   };
 
   // Remove order.

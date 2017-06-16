@@ -29,6 +29,7 @@ export default class OrderCtrl extends Controller {
     // Fields.
     this.client = "Min";
     this.totalPrice = 0.0;
+    this.reference = null;
 
     // Helpers.
     this.helpers({
@@ -53,10 +54,8 @@ export default class OrderCtrl extends Controller {
 
     // Listener
     // - Update order.
-    this.$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-      if(toState.name !== "tab.order") return;
-      if(this.$stateParams.reference === toParams.reference) return;
-      scope.setData(toParams.reference);
+    this.$rootScope.$on("order.update", function(event, order){
+      scope.setData(order);
     });
   };
 
@@ -89,12 +88,14 @@ export default class OrderCtrl extends Controller {
   // Load parameters.
   setData(order) {
     Meteor.call('empty.order');
+    this.client = order.client;
+    this.reference = order;
     order.items.forEach(function (item) {
       Order.insert({
         id: item.id,
         quantity: item.quantity
       });
-    });
+    });    
   };
 
   // Remove item.

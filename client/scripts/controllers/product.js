@@ -81,11 +81,8 @@ export default class ProductCtrl extends Controller {
 
     // Listeners.
     // - Update product.
-    this.$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-      if(toParams === fromParams) return;
-      if(toParams.reference !== undefined && toParams.reference !== null) {
-        scope.setData(toParams.reference);
-      }
+    this.$rootScope.$on("product.edit", function(event, product){
+      scope.setData(product);
     });
   };
 

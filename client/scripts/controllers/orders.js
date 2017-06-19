@@ -23,6 +23,9 @@ export default class OrdersCtrl extends Controller {
     this.subscribe("products");
     this.subscribe("orders");
 
+    // Fields.
+    this.state = undefined;
+
     // Helpers.
     this.helpers({
       orders() {
@@ -58,6 +61,11 @@ export default class OrdersCtrl extends Controller {
         ]
       }
     });
+  };
+
+  // Filter state.
+  filter(state) {
+    this.state = state; 
   };
 
   // Update status.

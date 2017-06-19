@@ -16,4 +16,20 @@
         height: auto !important;
       }
     }
+    .tabs-top {
+      position: relative;
+      top: 0;
+    }
+    .filter {
+      color: black;
+      background-color: transparent;
+    }
+    .filter.active {
+      background-color: #87ff28;
+      color: white;
+    }
+    .filter:hover {
+      background-color: #ff9600;
+      color: white;
+    }
   }

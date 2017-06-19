@@ -4,14 +4,14 @@
       <i class="icon ion-search placeholder-icon"></i>
       <input type="text" placeholder="Search">
     </label>
-    <div class="tabs tabs-top tabs-icon-only">
-      <div class="tab-item filter" ng-click="ordersCtrl.filter()">
-        <i class="icon ion-refresh"></i>
+    <div class="row">
+      <div class="col filter filter-state" ng-repeat="stateFilter in ordersCtrl.stateFilters">
+        {{stateFilter}}
       </div>
-      <div class="tab-item filter" ng-repeat="state in ordersCtrl.states" ng-click="ordersCtrl.filter(state)" ng-class="{active: state.name===ordersCtrl.state}">
-        <i class="icon {{state.icon}}"></i>
+      <div class="col filter filter-time" ng-repeat="timeFilter in ordersCtrl.timeFilters">
+        {{timeFilter}}
       </div>
-    </div>
+    </div>    
     <div class="list" ng-repeat="order in ordersCtrl.orders">
       <div class="card">
         <div class="item item-divider">
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="list" ng-repeat="item in order.items track by $index">
-          <div class="item item-thumbnail-left" ng-if="ordersCtrl.state === undefined || item.status===ordersCtrl.state">
+          <div class="item item-thumbnail-left" ng-if="ordersCtrl.filterItem(item)">
             <img ng-src="{{item.picture}}" />
             <div class="item item-divider">
               <h3>{{item.name}}</h3>

@@ -1,5 +1,5 @@
 // System.
-import Angular from 'angular';
+import Angular from "angular";
 import Moment from "moment";
 import {
   Controller
@@ -43,22 +43,41 @@ export default class OrdersCtrl extends Controller {
       },
       states() {
         return [{
-            'name': 'pending',
-            'icon': 'ion-more'
+            "name": "pending",
+            "icon": "ion-more"
           },
           {
-            'name': 'shopping',
-            'icon': 'ion-bag'
+            "name": "shopping",
+            "icon": "ion-bag"
           },
           {
-            'name': 'sending',
-            'icon': 'ion-paper-airplane'
+            "name": "sending",
+            "icon": "ion-paper-airplane"
           },
           {
-            'name': 'completed',
-            'icon': 'ion-checkmark'
+            "name": "completed",
+            "icon": "ion-checkmark"
           }
         ]
+      },
+      stateFilters() {
+        return [
+          "all",
+          "incomplete",
+          "pending",
+          "shopping",
+          "sending",
+          "completed"
+        ];
+      },
+      timeFilters() {
+        return [
+          "all",
+          "this year",
+          "this month",
+          "this week",
+          "today"
+        ];
       }
     });
   };
@@ -69,6 +88,18 @@ export default class OrdersCtrl extends Controller {
       this.state = state.name;
     } else {
       this.state = undefined;
+    }
+  };
+
+  // Filter item.
+  filterItem(item) {
+    if(this.state === undefined) {
+      return true;
+    } else {
+      if(item.status === this.state) {
+        return true;
+      }
+      return false;
     }
   };
 

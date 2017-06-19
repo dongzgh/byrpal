@@ -65,7 +65,11 @@ export default class OrdersCtrl extends Controller {
 
   // Filter state.
   filter(state) {
-    this.state = state; 
+    if (state && state.name) {
+      this.state = state.name;
+    } else {
+      this.state = undefined;
+    }
   };
 
   // Update status.

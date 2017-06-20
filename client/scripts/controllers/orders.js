@@ -42,36 +42,23 @@ export default class OrdersCtrl extends Controller {
         })
         return orders;
       },
-      states() {
-        return [{
-            "name": "pending",
-            "icon": "ion-more"
-          },
-          {
-            "name": "shopping",
-            "icon": "ion-bag"
-          },
-          {
-            "name": "sending",
-            "icon": "ion-paper-airplane"
-          },
-          {
-            "name": "completed",
-            "icon": "ion-checkmark"
-          }
-        ]
-      },
       filters() {
         return {
           "states": ["all", "imcomplete", "pending", "shopping", "sending", "completed"],
           "times": ["all", "this year", "this month", "this week", "today"]
+        }
+      },
+      statuses() {
+        return {
+          "states": ["pending", "shopping", "sending", "completed"],
+          "icons": ["ion-more", "ion-bag", "ion-paper-airplane", "ion-checkmark"]
         }
       }
     });
   };
 
   // Filter state.
-  filter(state, time) {
+  setFilter(state, time) {
     if (state)
       this.state = state;
     if (time)
@@ -79,51 +66,70 @@ export default class OrdersCtrl extends Controller {
   };
 
   // Filter item.
-  filterItem(order, item) {
+  checkItem(order, item) {
     let checkState = false;
-    if (this.state === "all" || item.status === this.state) {
+    if (this.state === "all") {
       checkState = true;
+    } else {
+      if (this.state === "imcomplete") {
+        if (item.status === "pending" ||
+          item.status === "shopping" ||
+          item.status === "sending") {
+          checkState = true;
+        }
+      } else if(this.state === item.status) {
+        checkState = true;
+      }
     };
     let checkTime = false;
-    // if (this.time === "all" || Moment(item.time).isAfter(2017)) {
-    //   checkTim = true;
-    // }
+    if (this.time === "all") {
+      checkTime = true;
+    } else {
+      let orderTime = Moment(order.time, "MMMM DD YYYY, h:mm:ss a");
+      let now = Moment();
+      if ((this.time === "this year" && orderTime.year() === now.year()) ||
+        (this.time === "this month" && orderTime.month() === now.month()) ||
+        (this.time === "this week" && orderTime.week() === now.week()) ||
+        (this.time === "today" && orderTime.day() === now.day())) {
+        checkTime = true;
+      }
+    }
     return checkState && checkTime;
   };
 
   // Update status.
   updateStatus(order, item, state) {
-    // - Update shopping collection.
-    if (item.status !== "shopping" && state === "shopping") {
-      let buy = Shopping.findOne({
-        id: item.id
-      });
-      if (buy === undefined) {
-        Shopping.insert({
-          id: item.id,
-          quantity: item.quantity
-        })
-      } else {
-        Shopping.update({
-          _id: buy._id
-        }, {
-          $inc: {
-            quantity: item.quantity
-          }
-        })
-      }
-    } else if (item.status === "shopping" && state !== "shopping") {
-      let buy = Shopping.findOne({
-        id: item.id
-      });
-      Shopping.update({
-        _id: buy._id
-      }, {
-        $inc: {
-          quantity: -item.quantity
-        }
-      })
-    }
+    // // - Update shopping collection.
+    // if (item.status !== "shopping" && state === "shopping") {
+    //   let buy = Shopping.findOne({
+    //     id: item.id
+    //   });
+    //   if (buy === undefined) {
+    //     Shopping.insert({
+    //       id: item.id,
+    //       quantity: item.quantity
+    //     })
+    //   } else {
+    //     Shopping.update({
+    //       _id: buy._id
+    //     }, {
+    //       $inc: {
+    //         quantity: item.quantity
+    //       }
+    //     })
+    //   }
+    // } else if (item.status === "shopping" && state !== "shopping") {
+    //   let buy = Shopping.findOne({
+    //     id: item.id
+    //   });
+    //   Shopping.update({
+    //     _id: buy._id
+    //   }, {
+    //     $inc: {
+    //       quantity: -item.quantity
+    //     }
+    //   })
+    // }
 
     // - Update item status.
     item.status = state;

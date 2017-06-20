@@ -24,7 +24,8 @@ export default class OrdersCtrl extends Controller {
     this.subscribe("orders");
 
     // Fields.
-    this.state = undefined;
+    this.state = "all";
+    this.time = "all";
 
     // Helpers.
     this.helpers({
@@ -60,47 +61,34 @@ export default class OrdersCtrl extends Controller {
           }
         ]
       },
-      stateFilters() {
-        return [
-          "all",
-          "incomplete",
-          "pending",
-          "shopping",
-          "sending",
-          "completed"
-        ];
-      },
-      timeFilters() {
-        return [
-          "all",
-          "this year",
-          "this month",
-          "this week",
-          "today"
-        ];
+      filters() {
+        return {
+          "states": ["all", "imcomplete", "pending", "shopping", "sending", "completed"],
+          "times": ["all", "this year", "this month", "this week", "today"]
+        }
       }
     });
   };
 
   // Filter state.
-  filter(state) {
-    if (state && state.name) {
-      this.state = state.name;
-    } else {
-      this.state = undefined;
-    }
+  filter(state, time) {
+    if (state)
+      this.state = state;
+    if (time)
+      this.time = time;
   };
 
   // Filter item.
-  filterItem(item) {
-    if(this.state === undefined) {
-      return true;
-    } else {
-      if(item.status === this.state) {
-        return true;
-      }
-      return false;
-    }
+  filterItem(order, item) {
+    let checkState = false;
+    if (this.state === "all" || item.status === this.state) {
+      checkState = true;
+    };
+    let checkTime = false;
+    // if (this.time === "all" || Moment(item.time).isAfter(2017)) {
+    //   checkTim = true;
+    // }
+    return checkState && checkTime;
   };
 
   // Update status.

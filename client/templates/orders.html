@@ -5,11 +5,11 @@
       <input type="text" placeholder="Search">
     </label>
     <div class="row">
-      <div class="col filter filter-state" ng-repeat="stateFilter in ordersCtrl.stateFilters">
-        {{stateFilter}}
+      <div class="col filter filter-state" ng-repeat="state in ordersCtrl.filters.states" ng-click="ordersCtrl.filter(state, undefined)">
+        {{state}}
       </div>
-      <div class="col filter filter-time" ng-repeat="timeFilter in ordersCtrl.timeFilters">
-        {{timeFilter}}
+      <div class="col filter filter-time" ng-repeat="time in ordersCtrl.filters.times" ng-click="ordersCtrl.filter(undefined, time)">
+        {{time}}
       </div>
     </div>    
     <div class="list" ng-repeat="order in ordersCtrl.orders">
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="list" ng-repeat="item in order.items track by $index">
-          <div class="item item-thumbnail-left" ng-if="ordersCtrl.filterItem(item)">
+          <div class="item item-thumbnail-left" ng-if="ordersCtrl.filterItem(order, item)">
             <img ng-src="{{item.picture}}" />
             <div class="item item-divider">
               <h3>{{item.name}}</h3>

@@ -43,9 +43,8 @@ export default class ProductCtrl extends Controller {
     this.exprsMinFee = 13.0;
     this.exprsWaiverMinPounds = 4.0;
     this.exprsWeightUnit = 0.5;
-    this.exprsAdditionalFee = 0.0;
     this.transFlatRate = 4.0;
-    this.transAdditionalFee = 0.0;
+    this.additionalFee = 0.0;
     this.retailPrices = [];
 
     // Helpers.
@@ -135,14 +134,12 @@ export default class ProductCtrl extends Controller {
     if (fee < this.exprsMinFee) {
       fee = this.exprsMinFee;
     }
-    fee += this.exprsAdditionalFee;
     return fee;
   };
 
   // Estimate transportaion fee.
   evalTransportationFee() {
     let fee = this.transFlatRate; // DONG: flat for now.
-    fee += this.transAdditionalFee;
     return fee;
   };
 
@@ -160,7 +157,7 @@ export default class ProductCtrl extends Controller {
         retailPrice = retailPrice * (this.profit.value / 100.0 + 1.0);
       else if (this.profit.model === "flat")
         retailPrice = retailPrice + this.profit.value;
-      this.retailPrices.push(retailPrice.toFixed(2));
+      this.retailPrices.push(Number(retailPrice.toFixed(2)));
     }
   };
 
@@ -191,9 +188,8 @@ export default class ProductCtrl extends Controller {
         exprsMinFee: this.exprsMinFee,
         exprsWaiverMinPounds: this.exprsWaiverMinPounds,
         exprsWeightUnit: this.exprsWeightUnit,
-        exprsAdditionalFee: this.exprsAdditionalFee,
         transFlatRate: this.transFlatRate,
-        transAdditionalFee: this.transAdditionalFee,
+        additionalFee: this.addtionalFee,
         retailPrices: this.retailPrices
       });
     } else {
@@ -215,9 +211,8 @@ export default class ProductCtrl extends Controller {
           exprsMinFee: this.exprsMinFee,
           exprsWaiverMinPounds: this.exprsWaiverMinPounds,
           exprsWeightUnit: this.exprsWeightUnit,
-          exprsAdditionalFee: this.exprsAdditionalFee,
           transFlatRate: this.transFlatRate,
-          transAdditionalFee: this.transAdditionalFee,
+          additionalFee: this.addtionalFee,
           retailPrices: this.retailPrices
         }
       });

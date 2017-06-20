@@ -19,27 +19,5 @@
     .tabs-top {
       position: relative;
       top: 0;
-    }
-    .filter {
-      color: white;
-      background-color: #ef473a;
-      text-transform: uppercase;
-      margin: 0 10px 0;
-      text-align: center;
-      cursor: pointer;
-    }
-    .filter.active {
-      background-color: #87ff28;
-      color: white;
-    }
-    .filter:hover {
-      background-color: #ff9600;
-      color: white;
-    }
-    .filter-state {
-      background-color: #ef473a;
-    }
-    .filter-time {
-      background-color: #565cf1;
-    }
+    }    
   }

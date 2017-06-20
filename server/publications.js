@@ -23,8 +23,4 @@ if (Meteor.isServer) {
   Meteor.publish("order", function () {
     return Order.find({});
   });
-
-  Meteor.publish("shopping", function () {
-    return Shopping.find({});
-  });
 }

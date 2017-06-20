@@ -5,8 +5,31 @@
   color: white;
 }
 
-.retailer {
-  margin-bottom: 10px;
+.filter {
+  color: white;
+  background-color: #ef473a;
+  text-transform: uppercase;
+  margin: 0 10px 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.filter.active {
+  background-color: #87ff28;
+  color: white;
+}
+
+.filter:hover {
+  background-color: #ff9600;
+  color: white;
+}
+
+.filter-state {
+  background-color: #ef473a;
+}
+
+.filter-time {
+  background-color: #565cf1;
 }
 
 .comments {
@@ -54,6 +77,8 @@
   background-color: #666;
   span:first-child {
     color: white;
+    text-transform: uppercase;
+    font-size: 14px;
   }
   input {
     color: white;
@@ -63,16 +88,6 @@
   i {
     margin-right: 20px;
   }
-}
-
-label {
-  input {
-    background-color: white;
-  }
-}
-
-label span:first-child {
-  margin-right: 50px;
 }
 
 .item-select select {

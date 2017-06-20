@@ -23,7 +23,7 @@ export default class ProductsCtrl extends Controller {
     // Helpers.
     this.helpers({
       products() {
-        return Products.find({});
+        return Products.find({}).fetch();
       }
     });
   };

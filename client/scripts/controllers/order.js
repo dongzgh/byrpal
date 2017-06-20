@@ -54,7 +54,7 @@ export default class OrderCtrl extends Controller {
 
     // Listener
     // - Update order.
-    this.$rootScope.$on("order.update", function(event, order){
+    this.$rootScope.$on("order.update", function (event, order) {
       scope.setData(order);
     });
   };
@@ -82,7 +82,7 @@ export default class OrderCtrl extends Controller {
       }
       totalPrice += unitPrice * item.quantity;
     });
-    return totalPrice.toFixed(2);
+    return Number(totalPrice.toFixed(2));
   };
 
   // Load parameters.
@@ -95,7 +95,7 @@ export default class OrderCtrl extends Controller {
         id: item.id,
         quantity: item.quantity
       });
-    });    
+    });
   };
 
   // Remove item.
@@ -121,14 +121,15 @@ export default class OrderCtrl extends Controller {
     let items = Order.find({}).fetch();
     items.forEach(function (item) {
       delete item._id;
+      delete item.name;
+      delete item.picture;
       item.status = 'pending';
     });
     let item = {
       client: this.client,
       time: Moment().format("MMMM DD YYYY, h:mm:ss a"),
       items: items,
-      totalPrice: this.totalPrice,
-      status: "pending"
+      totalPrice: this.totalPrice
     };
     Orders.insert(item);
     Meteor.call("empty.order");

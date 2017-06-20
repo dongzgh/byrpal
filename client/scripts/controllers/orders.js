@@ -98,41 +98,13 @@ export default class OrdersCtrl extends Controller {
   };
 
   // Update status.
-  updateStatus(order, item, state) {
-    // // - Update shopping collection.
-    // if (item.status !== "shopping" && state === "shopping") {
-    //   let buy = Shopping.findOne({
-    //     id: item.id
-    //   });
-    //   if (buy === undefined) {
-    //     Shopping.insert({
-    //       id: item.id,
-    //       quantity: item.quantity
-    //     })
-    //   } else {
-    //     Shopping.update({
-    //       _id: buy._id
-    //     }, {
-    //       $inc: {
-    //         quantity: item.quantity
-    //       }
-    //     })
-    //   }
-    // } else if (item.status === "shopping" && state !== "shopping") {
-    //   let buy = Shopping.findOne({
-    //     id: item.id
-    //   });
-    //   Shopping.update({
-    //     _id: buy._id
-    //   }, {
-    //     $inc: {
-    //       quantity: -item.quantity
-    //     }
-    //   })
-    // }
-
-    // - Update item status.
+  updateStatus(order, item, state) {    
     item.status = state;
+    let items = order.items;
+    items.forEach(function(item){
+      delete item.name;
+      delete item.picture;
+    })
     Orders.update({
       _id: order._id
     }, {

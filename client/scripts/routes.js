@@ -8,7 +8,8 @@ import ProductsCtrl from "./controllers/products";
 import ProductCtrl from "./controllers/product";
 import OrdersCtrl from "./controllers/orders";
 import OrderCtrl from "./controllers/order";
-import Shopping from "./controllers/shopping";
+import ShoppingCtrl from "./controllers/shopping";
+import SendingCtrl from "./controllers/sending";
 import SettingsCtrl from "./controllers/settings";
 
 // Templates
@@ -18,6 +19,7 @@ import productTemplateUrl from "../templates/product.html";
 import ordersTemplateUrl from "../templates/orders.html";
 import orderTemplateUrl from "../templates/order.html";
 import shoppingTemplateUrl from "../templates/shopping.html";
+import sendingTemplateUrl from "../templates/sending.html";
 import settingsTemplateUrl from "../templates/settings.html";
 
 // Config definition.
@@ -77,6 +79,15 @@ export default class RoutesConfig extends Config {
           "tab-shopping": {
             templateUrl: shoppingTemplateUrl,
             controller: "ShoppingCtrl as shoppingCtrl"
+          }
+        }
+      })
+      .state("tab.sending", {
+        url: "/sending",
+        views: {
+          "tab-sending": {
+            templateUrl: sendingTemplateUrl,
+            controller: "SendingCtrl as sendingCtrl"
           }
         }
       })

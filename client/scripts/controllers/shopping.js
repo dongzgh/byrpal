@@ -80,7 +80,7 @@ export default class ShoppingCtrl extends Controller {
         items.forEach(function (item) {
           if (item.status === "shopping" && item.id === article.id){
             item.status = "sending";
-            item.transFee = unitTransFee;
+            item.realTransFee = unitTransFee;
             update = true;
           }
         });

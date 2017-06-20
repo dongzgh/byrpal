@@ -17,6 +17,7 @@ import ProductCtrl from "./controllers/product";
 import OrdersCtrl from "./controllers/orders";
 import OrderCtrl from "./controllers/order";
 import ShoppingCtrl from "./controllers/shopping";
+import SendingCtrl from "./controllers/sending";
 import SettingsCtrl from "./controllers/settings";
 import CalendarFilter from "./filters/calendar";
 import RoutesConfig from "./routes";
@@ -36,6 +37,7 @@ new Loader(App)
   .load(OrdersCtrl)
   .load(OrderCtrl)
   .load(ShoppingCtrl)
+  .load(SendingCtrl)
   .load(SettingsCtrl)
   .load(CalendarFilter)
   .load(RoutesConfig);

@@ -55,6 +55,36 @@ export default class OrdersCtrl extends Controller {
         }
       }
     });
+
+    // Listeners.
+    this.$rootScope.$on("orders.final", function(){
+      console.log("order final received.");
+      this.orders.forEach(function(order){
+        let qualify = true;
+        order.items.forEach(function(item){
+          if(item.status !== "completed") {
+            qualify = false;
+          }
+        });
+        if(qualify){
+          let quote = 0.0;
+          let realExpenses = 0.0;
+          order.items.forEach(function(item){
+            realExpenses += item.realUnitPrice * item.quantity + item.realTransFee;
+          });
+          realExpenses += order.realExprsFee;
+          realProfit = realExpenses - order.totalPrice; 
+          Orders.update({
+            _id: order._id
+          }, {
+            $set: {
+              realExpenses: realExpenses,
+              realProfit: realProfit
+            }
+          })        
+        }
+      })
+    });
   };
 
   // Filter state.

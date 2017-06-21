@@ -134,9 +134,10 @@ export default class OrderCtrl extends Controller {
     Orders.insert(item);
     Meteor.call("empty.order");
     this.totalPrice = 0.0;
+    this.$ionicScrollDelegate.scrollTop();
   };
 }
 
 // Declaration.
 OrderCtrl.$name = "OrderCtrl";
-OrderCtrl.$inject = ["$rootScope", "$stateParams"];
+OrderCtrl.$inject = ["$rootScope", "$stateParams", "$ionicScrollDelegate"];

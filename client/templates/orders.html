@@ -20,6 +20,8 @@
             <h2>{{order.client}}</h2>
             <p>{{order.time}}</p>
             <p>${{order.totalPrice}}</p>
+            <p ng-if="order.realExpenses !== undefined">${{order.realExpenses}}</p>
+            <p ng-if="order.realProfit !== undefined">${{order.realProfit}}</p>
             <button class="button icon ion-edit" ng-click="ordersCtrl.edit(order)"></button>
             <button class="button icon ion-trash-a" ng-click="ordersCtrl.remove(order)"></button>
           </div>

@@ -217,9 +217,10 @@ export default class ProductCtrl extends Controller {
         }
       });
     }
+    this.$ionicScrollDelegate.scrollTop();
   };
 }
 
 // Declarations.
 ProductCtrl.$name = "ProductCtrl";
-ProductCtrl.$inject = ["FileUploader", "$rootScope", "$stateParams"];
+ProductCtrl.$inject = ["FileUploader", "$rootScope", "$stateParams", "$ionicScrollDelegate"];

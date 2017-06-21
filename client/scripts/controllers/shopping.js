@@ -41,7 +41,7 @@ export default class ShoppingCtrl extends Controller {
               });
               if (article) {
                 article.quantity += item.quantity;
-                article.totalPrice = Number((article.quantity * article.retailPrices[3]).toFixed(2));
+                article.totalPrice = Number((article.quantity * article.retailPrice).toFixed(2));
               } else {
                 let product = Products.findOne({
                   _id: item.id
@@ -52,8 +52,8 @@ export default class ShoppingCtrl extends Controller {
                 article.quantity = item.quantity;
                 article.picture = product.pictures[0];
                 article.retailer = product.retailer;
-                article.retailPrices = product.retailPrices;
-                article.totalPrice = Number((article.quantity * article.retailPrices[3]).toFixed(2));
+                article.retailPrice = product.retailPrices[3];
+                article.totalPrice = Number((article.quantity * article.retailPrice).toFixed(2));
                 article.comment = "";
                 articles.push(article);
               }
@@ -80,7 +80,8 @@ export default class ShoppingCtrl extends Controller {
         items.forEach(function (item) {
           if (item.status === "shopping" && item.id === article.id){
             item.status = "sending";
-            item.realTransFee = unitTransFee;
+            item.realTransFee = unitTransFee; 
+            item.realRetailPrice = article.retailPrice;
             update = true;
           }
         });
@@ -95,8 +96,10 @@ export default class ShoppingCtrl extends Controller {
         }
       });
     });
-  };
+    this.$ionicScrollDelegate.scrollTop();
+  };  
 }
 
 // Declarations.
 ShoppingCtrl.$name = "ShoppingCtrl";
+ShoppingCtrl.$inject = ["$ionicScrollDelegate"];

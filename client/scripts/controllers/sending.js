@@ -77,8 +77,11 @@ export default class SendingCtrl extends Controller {
         }
       });
     })
+    this.$rootScope.$broadcast("orders.final");
+    this.$ionicScrollDelegate.scrollTop();
   };
 }
 
 // Declarations.
 SendingCtrl.$name = "SendingCtrl";
+SendingCtrl.$inject = ["$rootScope", "$ionicScrollDelegate"];

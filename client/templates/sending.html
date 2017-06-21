@@ -4,6 +4,27 @@
       <i class="icon ion-search placeholder-icon"></i>
       <input type="text" placeholder="Search">
     </label>
+    <div class="list" ng-repeat="order in sendingCtrl.orders">
+      <div class="card">
+        <div class="item item-divider">
+          <div class="item item-avatar">
+            <img ng-src="images/person.jpg"></img>
+            <h2>{{order.client}}</h2>
+            <p>{{order.time}}</p>
+            <p>${{order.totalPrice}}</p>
+          </div>
+        </div>
+        <div class="list" ng-repeat="item in order.items">
+          <div class="item item-thumbnail-left">
+            <img ng-src="{{item.picture}}" />
+            <div class="item item-divider">
+              <h3>{{item.name}}</h3>
+              <p>QTY: {{item.quantity}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="button-bar">
       <button class="button icon ion-archive" ng-click="sendingCtrl.save()"></button>
     </div>

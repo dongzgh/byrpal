@@ -1,23 +1,5 @@
 [name="tab-products"] {
   img {
-    height: 150px;
-  }
-  h2 {
-    color: white;
-  }
-  .card {
-    border-radius: 0;
-    .item-divider:first-child {
-      background-color: #222;
-      padding: 5px;
-      .item-avatar {
-        background-color: transparent;
-        a {
-          background-color: transparent;
-          color: white;
-          border: none;
-        }
-      }
-    }
+    height: 150px !important;
   }
 }

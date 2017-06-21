@@ -56,6 +56,13 @@ export default class ProductsCtrl extends Controller {
       })
     }
   };
+
+  // Remove product.
+  remove(product){
+    Products.remove({
+      _id: product._id
+    })
+  };
 }
 
 // Declarations.

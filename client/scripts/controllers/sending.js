@@ -23,56 +23,60 @@ export default class SendingCtrl extends Controller {
 
     // Helpers.
     this.helpers({
-      orders() {
-        let rawOrders = Orders.find().fetch();
+      articles() {
+        let orders = Orders.find().fetch();
         // - Filter oders.
-        let orders = [];
-        rawOrders.forEach(function(rawOrder){
-          for(let i = 0; i < rawOrder.items.length; i++) {
-            if(rawOrder.items[i].status === "sending") {
-              orders.push(rawOrder);
+        let articles = [];
+        orders.forEach(function (order) {
+          for (let i = 0; i < order.items.length; i++) {
+            if (order.items[i].status === "sending") {
+              let article = order;
+              article.realExprsFee = 0.0;
+              articles.push(article);
               break;
             }
           }
         });
         // - Filter items.
-        orders.forEach(function(order){
+        articles.forEach(function (article) {
           let items = [];
-          for(let i = 0; i < order.items.length; i++) {
-            if(order.items[i].status === "sending") {
-              let item = order.items[i];
-              let product = Products.findOne({_id: item.id});
+          for (let i = 0; i < article.items.length; i++) {
+            if (article.items[i].status === "sending") {
+              let item = article.items[i];
+              let product = Products.findOne({
+                _id: item.id
+              });
               item.name = product.name
               item.picture = product.pictures[0];
               items.push(item);
             }
           }
-          order.items = items;
+          article.items = items;
         });
-        return orders;
+        return articles;
       }
     });
   };
 
-  // Filter.
-  filter(order) {
-    order.items.forEach(function(item){
-      if(item.status === "sending") {
-        return true;
-      }
-    });
-  }
-
-  // Checker.
-  checkItem(order, item) {
-    if(item.status === "sending") {
-      return true;
-    }
-    return false;
-  };
-  
   // Save.
   save() {
+    this.articles.forEach(function (article) {
+      article.items.forEach(function(item){
+        delete item.name;
+        delete item.picture;
+        if(item.status === "sending") {
+          item.status = "completed";
+        }
+      });
+      Orders.update({
+        _id: article._id
+      }, {
+        $set: {
+          realExprsFee: article.realExprsFee,
+          items: article.items
+        }
+      });
+    })
   };
 }
 

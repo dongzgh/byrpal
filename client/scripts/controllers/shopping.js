@@ -91,7 +91,7 @@ export default class ShoppingCtrl extends Controller {
             $set: {
               items: order.items
             }
-          })
+          });
         }
       });
     });

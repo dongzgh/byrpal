@@ -4,17 +4,17 @@
       <i class="icon ion-search placeholder-icon"></i>
       <input type="text" placeholder="Search">
     </label>
-    <div class="list" ng-repeat="order in sendingCtrl.orders">
+    <div class="list" ng-repeat="article in sendingCtrl.articles">
       <div class="card">
         <div class="item item-divider">
           <div class="item item-avatar">
             <img ng-src="images/person.jpg"></img>
-            <h2>{{order.client}}</h2>
-            <p>{{order.time}}</p>
-            <p>${{order.totalPrice}}</p>
+            <h2>{{article.client}}</h2>
+            <p>{{article.time}}</p>
+            <p>${{article.totalPrice}}</p>
           </div>
         </div>
-        <div class="list" ng-repeat="item in order.items">
+        <div class="list" ng-repeat="item in article.items track by $index">
           <div class="item item-thumbnail-left">
             <img ng-src="{{item.picture}}" />
             <div class="item item-divider">
@@ -23,6 +23,10 @@
             </div>
           </div>
         </div>
+        <label class="item item-input">
+          <span class="input-label">Express Fee</span>
+          <input type="text" ng-model="sendingCtrl.articles[$index].realExprsFee"/>
+        </label>
       </div>
     </div>
     <div class="button-bar">

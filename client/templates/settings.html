@@ -3,16 +3,15 @@
     <div class="list">
       <label class="item item-input">
         <span class="input-label">Price Unit</span>
-        <input type="text" ng-model="settingsCtrl.priceUnit">
+        <input type="text" disabled ng-model="settingsCtrl.priceUnit">
       </label>
       <label class="item item-input">
-        <span class="input-label">Package</span>
-        <input type="text" ng-model="settingsCtrl.package">
+        <span class="input-label">Conversion Rate</span>
+        <input type="text" ng-model="settingsCtrl.conversionRate">
       </label>
-      <label class="item item-input">
-        <span class="input-label">Custom Tarif</span>
-        <input type="text" ng-model="settingsCtrl.customTarif">
-      </label>
+      <div class="button-bar">
+        <button class="button icon ion-archive" ng-click="settingsCtrl.save()"></button>
+      </div>
     </div>
   </ion-content>
 </ion-view>

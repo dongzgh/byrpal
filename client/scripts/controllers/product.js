@@ -7,8 +7,7 @@ import Units from "mathjs";
 
 // Data.
 import {
-  Products,
-  Retailers
+  Products
 } from "../../../lib/collections";
 
 // Controller definition.
@@ -46,6 +45,7 @@ export default class ProductCtrl extends Controller {
     this.transFlatRate = 4.0;
     this.additionalFee = 0.0;
     this.retailPrices = [];
+    this.convertedPrices = [];
 
     // Helpers.
     this.helpers({
@@ -158,6 +158,7 @@ export default class ProductCtrl extends Controller {
       else if (this.profit.model === "flat")
         retailPrice = retailPrice + this.profit.value;
       this.retailPrices.push(Number(retailPrice.toFixed(2)));
+      this.convertedPrices.push(Number(retailPrice.toFixed(2) * 5.1716));
     }
   };
 

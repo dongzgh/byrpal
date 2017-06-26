@@ -11,7 +11,8 @@ import Moment from "moment";
 import {
   Products,
   Orders,
-  Order
+  Order,
+  Settings
 } from "../../../lib/collections";
 
 // Controller definition.
@@ -25,6 +26,7 @@ export default class OrderCtrl extends Controller {
     this.subscribe("products");
     this.subscribe("orders");
     this.subscribe("order");
+    this.subscribe("settings");
 
     // Fields.
     this.client = "Min";

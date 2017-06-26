@@ -4,23 +4,46 @@ import {
 } from "angular-ecmascript/module-helpers";
 import Moment from "moment";
 
+// Data.
+import {
+  Settings
+} from "../../../lib/collections";
+
 // Controller definitions.
 export default class SettingsCtrl extends Controller {
   // Construction.
   constructor() {
     super(...arguments);
 
+    // Subscriptions.
+    this.subscribe("settings");
+
     // Fields.    
-    this.transportationFee = 0;
-    this.firstPound = 0;
-    this.restPound = 0;
-    this.firstPoundWaveCondition = 0;
     this.priceUnit = "CAD$";
-    this.package = 1;
-    this.customTarif = 0.12;
+    this.conversionRate = 5.1716;
 
     // Helpers.
     this.helpers({});
+  };
+
+  // Save.
+  save() {
+    let settings = Settings.findOne();
+    if (settings) {
+      Settings.upsert({
+        _id: settings._id
+      }, {
+        $set: {
+          priceUnit: this.priceUnit,
+          conversionRate: this.conversionRate
+        }
+      });
+    } else {
+      Settings.insert({
+        priceUnit: this.priceUnit,
+        conversionRate: this.conversionRate
+      });
+    }
   };
 }
 

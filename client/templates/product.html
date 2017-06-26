@@ -105,6 +105,12 @@
           QTY ({{$index + 1}}) : {{retailPrice | number : 2}}
         </span>
       </label>
+      <label class="item item-input">
+        <span class="input-label">Retail Prices (Converted)</span>
+        <span class="price" ng-repeat="convertedPrice in productCtrl.convertedPrices">
+          QTY ({{$index + 1}}) : {{convertedPrice | number : 2}}
+        </span>
+      </label>
       <div class="button-bar">
         <button class="button icon ion-archive" ng-click="productCtrl.save()"></button>
       </div>

@@ -7,7 +7,8 @@ import {
   Products,
   Orders,
   Order,
-  Shopping
+  Shopping,
+  Settings
 } from "../lib/collections";
 
 // Publications.
@@ -22,5 +23,9 @@ if (Meteor.isServer) {
 
   Meteor.publish("order", function () {
     return Order.find({});
+  });
+
+  Meteor.publish("settings", function () {
+    return Settings.find({});
   });
 }

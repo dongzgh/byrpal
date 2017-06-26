@@ -8,8 +8,7 @@ import {
 // Data.
 import {
   Products,
-  Orders,
-  Shopping
+  Orders
 } from "../../../lib/collections";
 
 // Controller definition.

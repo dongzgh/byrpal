@@ -163,6 +163,7 @@ export default class ProductCtrl extends Controller {
     if (this.weight === 0) return;
     if (this.unitPrice === 0) return;
     this.retailPrices = [];
+    this.convertedPrices = [];
     let exprsFee = this.evalExpressFee();
     let transFee = this.evalTransportationFee();
     for (let i = 0; i < 4; i++) {
@@ -206,7 +207,8 @@ export default class ProductCtrl extends Controller {
         exprsWeightUnit: this.exprsWeightUnit,
         transFlatRate: this.transFlatRate,
         additionalFee: this.addtionalFee,
-        retailPrices: this.retailPrices
+        retailPrices: this.retailPrices,
+        convertedPrices: this.convertedPrices
       });
     } else {
       Products.upsert({
@@ -229,7 +231,8 @@ export default class ProductCtrl extends Controller {
           exprsWeightUnit: this.exprsWeightUnit,
           transFlatRate: this.transFlatRate,
           additionalFee: this.addtionalFee,
-          retailPrices: this.retailPrices
+          retailPrices: this.retailPrices,
+          convertedPrices: this.convertedPrices
         }
       });
     }

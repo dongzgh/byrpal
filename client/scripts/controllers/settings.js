@@ -19,8 +19,10 @@ export default class SettingsCtrl extends Controller {
     this.subscribe("settings");
 
     // Fields.    
-    this.priceUnit = "CAD$";
+    this.systemCurrency = "CAD";
+    this.localCurrency = "CNY";
     this.conversionRate = 5.1716;
+    this.taxRates = "0.13, 0.08, 0.05, 0.00";
 
     // Helpers.
     this.helpers({});
@@ -29,19 +31,24 @@ export default class SettingsCtrl extends Controller {
   // Save.
   save() {
     let settings = Settings.findOne();
+    let taxRates = this.taxRates.split(",").map(Number);
     if (settings) {
       Settings.upsert({
         _id: settings._id
       }, {
         $set: {
-          priceUnit: this.priceUnit,
-          conversionRate: this.conversionRate
+          systemCurrency: this.systemCurrency,
+          localCurrency: this.localCurrency,
+          conversionRate: this.conversionRate,
+          taxRates: taxRates
         }
       });
     } else {
       Settings.insert({
-        priceUnit: this.priceUnit,
-        conversionRate: this.conversionRate
+        systemCurrency: this.systemCurrency,
+        localCurrency: this.localCurrency,
+        conversionRate: this.conversionRate,
+        taxRates: taxRates
       });
     }
   };

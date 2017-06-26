@@ -2,12 +2,20 @@
   <ion-content>
     <div class="list">
       <label class="item item-input">
-        <span class="input-label">Price Unit</span>
-        <input type="text" disabled ng-model="settingsCtrl.priceUnit">
+        <span class="input-label">System Currency</span>
+        <input type="text" disabled ng-model="settingsCtrl.systemCurrency">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Local Currency</span>
+        <input type="text" disabled ng-model="settingsCtrl.localCurrency">
       </label>
       <label class="item item-input">
         <span class="input-label">Conversion Rate</span>
         <input type="text" ng-model="settingsCtrl.conversionRate">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Tax Rates</span>
+        <input type="text" ng-model="settingsCtrl.taxRates">
       </label>
       <div class="button-bar">
         <button class="button icon ion-archive" ng-click="settingsCtrl.save()"></button>

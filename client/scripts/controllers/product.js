@@ -7,7 +7,8 @@ import Units from "mathjs";
 
 // Data.
 import {
-  Products
+  Products,
+  Settings
 } from "../../../lib/collections";
 
 // Controller definition.
@@ -19,20 +20,27 @@ export default class ProductCtrl extends Controller {
 
     // Subscriptions.    
     this.subscribe("products");
-    this.subscribe("retailers");
+    this.subscribe("settings");
 
     // Fields.
     this.name = "";
     this.tags = "";
     this.pictures = [];
     this.description = "";
+    this.weightUnits = [
+      "kilogram", "gram", "pound", "ounce"
+    ];
     this.weight = {
       unit: "gram",
       value: 0.0
     };
     this.unitPrice = 0.0;
-    this.taxRate = "13%";
     this.retailer = "";
+    this.taxRate = "0.13";
+    this.profitModels = [
+      "ratio",
+      "fixed"
+    ];
     this.profit = {
       model: 'ratio',
       value: 10.0
@@ -70,6 +78,13 @@ export default class ProductCtrl extends Controller {
             });
           }
         })
+      },
+      settings() {
+        let record = Settings.findOne();
+        if(record) {
+          this.taxRate = record.taxRates[0].toString();
+        }        
+        return record;
       }
     });
 
@@ -152,7 +167,7 @@ export default class ProductCtrl extends Controller {
     let transFee = this.evalTransportationFee();
     for (let i = 0; i < 4; i++) {
       let quantity = i + 1;
-      let retailPrice = this.unitPrice * (parseFloat(this.taxRate) / 100.0 + 1.0) + exprsFee / quantity + transFee / quantity;
+      let retailPrice = this.unitPrice * (parseFloat(this.taxRate) + 1.0) + exprsFee / quantity + transFee / quantity;
       if (this.profit.model === "ratio")
         retailPrice = retailPrice * (this.profit.value / 100.0 + 1.0);
       else if (this.profit.model === "flat")

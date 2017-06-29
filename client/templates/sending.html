@@ -2,9 +2,9 @@
   <ion-content>
     <label class="item item-input">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="text" placeholder="Search">
+      <input type="text" placeholder="Search" ng-model="sendingCtrl.searchText">
     </label>
-    <div class="list" ng-repeat="article in sendingCtrl.articles">
+    <div class="list" ng-repeat="article in sendingCtrl.articles | filter:sendingCtrl.searchText">
       <div class="card">
         <div class="item item-divider">
           <div class="item item-avatar">

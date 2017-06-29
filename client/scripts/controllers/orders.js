@@ -25,6 +25,7 @@ export default class OrdersCtrl extends Controller {
     // Fields.
     this.state = "all";
     this.time = "all";
+    this.searchText = "";
 
     // Helpers.
     this.helpers({

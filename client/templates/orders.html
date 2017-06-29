@@ -2,7 +2,7 @@
   <ion-content>
     <label class="item item-input">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="text" placeholder="Search">
+      <input type="text" placeholder="Search" ng-model="ordersCtrl.searchText">
     </label>
     <div class="row">
       <div class="col filter filter-state" ng-repeat="state in ordersCtrl.filters.states" ng-click="ordersCtrl.setFilter(state, undefined)" ng-class="{active: state===ordersCtrl.state}">
@@ -12,7 +12,7 @@
         {{time}}
       </div>
     </div>    
-    <div class="list" ng-repeat="order in ordersCtrl.orders">
+    <div class="list" ng-repeat="order in ordersCtrl.orders | filter:ordersCtrl.searchText">
       <div class="card">
         <div class="item item-divider">
           <div class="item item-avatar">

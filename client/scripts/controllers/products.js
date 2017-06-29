@@ -20,6 +20,9 @@ export default class ProductsCtrl extends Controller {
     this.subscribe("products");
     this.subscribe("order");
 
+    // Fields.
+    this.searchText = "";
+    
     // Helpers.
     this.helpers({
       products() {

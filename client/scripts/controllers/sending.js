@@ -21,6 +21,9 @@ export default class SendingCtrl extends Controller {
     this.subscribe("products");
     this.subscribe("orders");
 
+    // Fields.
+    this.searchText = "";
+
     // Helpers.
     this.helpers({
       articles() {

@@ -2,9 +2,9 @@
   <ion-content>
     <label class="item item-input">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="text" placeholder="Search">
+      <input type="text" placeholder="Search" ng-model="shoppingCtrl.searchText">
     </label>
-    <div class="list" ng-repeat="article in shoppingCtrl.articles">
+    <div class="list" ng-repeat="article in shoppingCtrl.articles | filter:shoppingCtrl.searchText">
       <div class="card">
         <div class="item item-thumbnail-left">
           <img ng-src="{{article.picture}}"></img>

@@ -23,6 +23,7 @@ export default class ShoppingCtrl extends Controller {
 
     // Fields.
     this.allTransFee = 0.0;
+    this.searchText = "";
 
     // Helpers.
     this.helpers({

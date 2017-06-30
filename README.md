@@ -1,5 +1,5 @@
 # Introduction
-ShopAgent is an application for managing products and tracking orders. It's targeting shop agent's business flow management.
+BuyerAgent is an application for managing products and tracking orders. It's targeting shop agent's business flow management.
 Technologies used to build the application are listed as blow:
 1. Meteor framework
 2. AngularJS v1.
@@ -18,7 +18,7 @@ Technologies used to build the application are listed as blow:
 
 # Build and Test
 Build and Run:
-$shopagent/Meteor
+$buyeragent/Meteor
 
 # Contribute
 Copyright 2017

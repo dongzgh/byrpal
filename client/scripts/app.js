@@ -23,7 +23,7 @@ import CalendarFilter from "./filters/calendar";
 import RoutesConfig from "./routes";
 
 // App
-const App = "ShopAgent";
+const App = "BuyerAgent";
 Angular.module(App, [
   "angular-meteor",
   "ui.router",

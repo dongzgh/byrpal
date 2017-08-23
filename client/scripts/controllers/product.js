@@ -83,7 +83,7 @@ export default class ProductCtrl extends Controller {
         let record = Settings.findOne();
         if(record) {
           this.taxRate = record.taxRates[0].toString();
-        }        
+        }
         return record;
       }
     });
